@@ -1,0 +1,20 @@
+.App {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.App #banner #banner-text {
+   margin: 0;
+   padding: 0;
+   padding-bottom: 8.5px;
+}
+
+.App #info-body {
+    margin-left: 6.5vw;
+    margin-right: 6.5vw;
+}
+
+.App #info-body .about-header {
+    padding-bottom: 5px;
+}

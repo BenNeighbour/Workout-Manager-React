@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+body .workoutCard {
+    display: inline-block;
+    width: 31.45%;
+    height: 50vh;
+    max-height: 50vh;
+    padding: 10px;
+}
+body .workoutCard {
+   padding: 1px;
+   float: left;
+   margin-left: 1vh;
+   margin-right: 6.5px;
+   margin-top: 7.5px;
+   margin-bottom: 7.5px;
+   overflow: hidden;
+}
+
+body .workoutCard ::-webkit-scrollbar {
+    width: 0px;
+}
+
+body:after {
+    display: table;
+    clear: both;
+}
+  
+
+@media screen and (max-width: 600px) {
+    body .workoutCard {
+        float: left;
+        max-height: 110%;
+        width: 96%;
+        margin-left: none;
+        margin-left: none;
+        margin-top: 15px;
+    }
+}

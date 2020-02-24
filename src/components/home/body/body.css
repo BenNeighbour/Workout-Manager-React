@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.App .welcome {
+    color: #007bff;
+    font-weight: 50;
+    padding: 12.5px;
+    font-size: 232%;
+    margin-left: 3vh;
+    margin-top: 1.3vh;
+}

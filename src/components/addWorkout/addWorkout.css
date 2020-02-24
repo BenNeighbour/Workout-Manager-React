@@ -1,0 +1,28 @@
+.App #header {
+    color: #007bff;
+    font-weight: 50;
+    padding: 12.5px;
+    font-size: 232%;
+    margin: 0.8vh;
+}
+
+.AddWorkoutForm .name, .description, .duration {
+    color: #007bff;
+    font-weight: 50;
+    height: 100%;
+    overflow-y: hidden;
+    padding: 3.5;
+    font-size: 145%;
+    margin-left: 2.3vh;
+    margin-top: 0.4vh;
+}
+
+.AddWorkoutForm #name, #description, #duration {
+    font-weight: 50;
+    padding: 0.85vw;
+    font-size: 110%;
+    margin-left: 3vh;
+    margin-top: 0.4vh;
+    width: 55%;
+    margin-bottom: 1.5vh;
+}

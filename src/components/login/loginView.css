@@ -1,0 +1,109 @@
+html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.loginForm {
+    margin: 0;
+    padding: 0;
+}
+
+.loginForm .submit-btn {
+    width: 30%;
+    height: 100%;
+}
+.loginForm .submit-btn .submit-btn {
+    width: 100%;
+}
+
+.loginForm {
+    display: inline-block;
+    width: 48vw;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-63%);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; 
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 90px;
+    padding-bottom: 100px;
+    background-clip: border-box;
+    background-color: white;
+    border-radius: 4.5px;
+    background-color: white;
+}
+
+.loginForm .logo {
+    height: 100%;
+    padding-bottom: 15px;
+    font-weight: 50;
+    color: #007bff;
+}
+
+.loginForm .field {
+    width: 69%;
+    height: 100%;
+    padding-bottom: 13px;
+}
+
+.loginForm .submit-btn {
+    width: 68%;
+    height: 100%;
+    padding-bottom: 13px;
+}
+
+.loginForm a {
+    align-items: left;
+}
+
+@media screen and (max-width: 600px) {
+
+    .loginForm .field {
+        width: 85%;
+        padding-bottom: 13px;
+    }
+    
+    .loginForm .submit-btn {
+        width: 85%;
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+    
+    .loginForm .field {
+        width: 75%;
+        padding-bottom: 26px;
+    }
+    .loginForm .field .form-control {
+        height: 6vh;
+    }
+    
+    .loginForm .submit-btn {
+        width: 75%;
+    }
+    .loginForm .submit-btn .submit-btn {
+        height: 5vh;
+    }
+
+    .loginForm {
+        width: 100%;
+    }
+    
+}
+
+.loginForm .or {
+    margin: none;
+    padding: none;
+    line-height: 16px;
+    font-size: small;
+    color: #C1C1C1;
+}

@@ -1,0 +1,197 @@
+.body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 1vh;
+}
+
+.body #header {
+    color: #007bff;
+    font-weight: 50;
+    padding: 12.5px;
+    font-size: 232%;
+    margin: 0.8vh;
+}
+
+.body .name {
+    color: #007bff;
+    font-weight: 50;
+    padding: 0;
+    font-size: 145%;
+    margin-left: 2.3vh;
+    margin-top: 0.4vh;
+}
+
+.body .exercise-name {
+    color: #007bff;
+    font-weight: 50;
+    overflow-y: hidden;
+    font-size: 95%;
+    margin: 12px;
+}
+
+.body .exercise-title {
+    color: #007bff;
+    font-weight: 50;
+    overflow-y: hidden;
+    font-size: 130%;
+    margin: 0;
+}
+
+.body .accordion {
+    margin-left: 1.5vh;
+    width: 56%;
+    padding-bottom: 2vh;
+}
+
+.body .accordion .nested-accordion {
+    margin-left: 1.5vh;
+    width: 50vw;
+    padding-bottom: 2vh;
+}
+
+.body .accordion .cards {
+    width: 100%;
+    height: 100%;
+}
+
+.body .accordion .nested-accordion .cards {
+    width: 100%;
+    height: 100%;
+}
+
+.body .accordion .cards .collapse .card-body .nested-accordion .exercise-cards {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border-radius: .25rem;
+    margin: 0;
+    padding: 2px;
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+.toggle-name {
+    color: #007bff;
+    font-weight: 50;
+    overflow-y: hidden;
+    font-size: 145%;
+}
+
+
+.body .accordion .cards .collapsing .card-body .nested-accordion .exercise-cards {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border: 1px solid white;
+    border-radius: .25rem;
+    margin: 0;
+    padding: 2px;
+}
+
+.body .card-header {
+    padding: 10px 12px;
+    margin-bottom: 0;
+    background-color: white;
+    border-bottom: none;
+    width: 20vw;
+    float: left;
+}
+
+.body .master-card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border: 1px solid #007bff;
+    border-radius: .25rem;
+}
+
+.body .accordion .cards .card-header .btn {
+    padding: 5px;
+    text-align: left;
+    width: 100%;
+}
+
+.editForm #header {
+    color: #007bff;
+    font-weight: 50;
+    padding: 12.5px;
+    font-size: 232%;
+    margin: 0.8vh;
+}
+
+.editForm .name, .description, .duration {
+    color: #007bff;
+    font-weight: 50;
+    height: 100%;
+    overflow-y: hidden;
+    padding: 3.5px;
+    font-size: 145%;
+    margin-left: 2.3vh;
+    margin-top: 0.4vh;
+}
+
+.btn-link {
+    padding: 0;
+}
+
+.editForm #name, #description, #duration {
+    font-weight: 50;
+    padding: 0.85vw;
+    font-size: 110%;
+    margin-left: 3vh;
+    margin-top: 0.4vh;
+    width: 55%;
+    margin-bottom: 1.5vh;
+}
+
+.exercise-dropdown {
+    width: 100vw;
+    flex: 1;
+    background-color: white;
+    border-color: white;
+    margin: 0.8vh;
+}
+
+.exercise-dropdown .exercise-dropdown {
+    width: 100%;
+    height: 10%;
+    text-align: left;
+    padding: 14px;
+    margin-top: auto;
+}
+
+.exercise-dropdown .dropdown-items {
+    margin: 0;
+    padding: 1;
+} 
+
+.body .edit-btn {
+    width: 7vw;
+    margin-left: 1.5vh;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #007bff;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    font-size: 145%;    
+    font-weight: 400;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link {
+    color: #007bff;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    font-size: 145%;    
+    font-weight: 50;
+}

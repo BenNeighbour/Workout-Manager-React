@@ -1,0 +1,105 @@
+html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.signupForm {
+    margin: 0;
+    padding: 0;
+}
+
+.signupForm .submit-btn {
+    width: 30%;
+    height: 100%;
+}
+.signupForm .submit-btn .submit-btn {
+    width: 100%;
+}
+
+.signupForm {
+    display: inline-block;
+    width: 48vw;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-63%);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; 
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 90px;
+    padding-bottom: 100px;
+    background-clip: border-box;
+    background-color: white;
+    border-radius: 4.5px;
+    background-color: white;
+}
+
+.signupForm .logo {
+    height: 100%;
+    padding-bottom: 15px;
+    font-weight: 50;
+    color: #007bff;
+}
+
+.signupForm .field {
+    width: 69%;
+    height: 100%;
+    padding-bottom: 13px;
+}
+
+.signupForm .submit-btn {
+    width: 68%;
+    height: 100%;
+    padding-bottom: 13px;
+}
+
+@media screen and (max-width: 600px) {
+
+    .signupForm .field {
+        width: 85%;
+        padding-bottom: 13px;
+    }
+    
+    .signupForm .submit-btn {
+        width: 85%;
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+    
+    .signupForm .field {
+        width: 75%;
+        padding-bottom: 26px;
+    }
+    .signupForm .field .form-control {
+        height: 6vh;
+    }
+    
+    .signupForm .submit-btn {
+        width: 75%;
+    }
+    .signupForm .submit-btn .submit-btn {
+        height: 5vh;
+    }
+
+    .signupForm {
+        width: 100%;
+    }
+    
+}
+
+.signupForm .or {
+    margin: none;
+    padding: none;
+    line-height: 16px;
+    font-size: small;
+    color: #C1C1C1;
+}
