@@ -14,6 +14,11 @@ const validate = values => {
         errors.updateConfirmPassword = 'Required';
     }
 
+    if (values.updateConfirmPassword !== values.updatePassword) {
+        errors.password = 'Passwords mismatched';
+        errors.confirmPassword = 'Passwords mismatched';
+    }
+
     return errors;
 };
   

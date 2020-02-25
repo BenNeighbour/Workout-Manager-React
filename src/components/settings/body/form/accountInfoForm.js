@@ -28,6 +28,15 @@ let AccountInfoForm = props => {
             <Field label="Confirm New Password"
                 name="updateConfirmPassword" type="password"
                 component={renderField} hidden={isNotChangingPassword} />
+            <br />
+            
+            <Field label="Date of Birth"
+                name="updateDOB" type="date"
+                component={renderField} />
+            
+            <br />
+            <Button variant="outline-primary" style={{ margin: "3.5px" }}
+                type="submit">Update Information</Button>
     
         </form>
     );
@@ -35,7 +44,7 @@ let AccountInfoForm = props => {
 
 const renderField = ({ hidden, input, label, type, meta: { touched, error, warning } }) => (
     <div hidden={hidden} className="field">
-        <input {...input} style={{marginLeft: "3.5px", margin: "5px", width: "90%"}} className="form-control" placeholder={label} type={type} />
+        <input disabled={hidden} {...input} style={{marginLeft: "3.5px", margin: "5px", width: "98%"}} className="form-control" placeholder={label} type={type} />
 
         <div className="message">
             {touched && ((error && <p style={{ marginBottom: "0px", marginTop: "0px", color: "red"}}>{error}</p>) || (warning && <p>{warning}</p>))}

@@ -5,6 +5,14 @@ import AccountInfoForm from "./form/accountInfoForm.js";
 import { store } from '../../../redux/store.js';
 
 class Body extends React.Component {
+
+    submit = async values => { 
+        // Make PUT request to server with the new User.
+
+        this.props.history.push("/login");
+        store.dispatch({type: "USER_LOGOUT"});
+    }
+
     render() {
         return (
             <div className="App">
@@ -13,7 +21,7 @@ class Body extends React.Component {
                 <Tab.Container id="list-group-tabs-example" defaultActiveKey="#accountInfo">
                     <Row>
                         <Col sm={4}>
-                            <ListGroup style={{margin: "3vw"}} >
+                            <ListGroup style={{margin: "3vw", width: "94%"}} >
                                 <ListGroup.Item action href="#accountInfo">
                                     Account Info
                                 </ListGroup.Item>
@@ -32,7 +40,7 @@ class Body extends React.Component {
                                     <AccountInfoForm initialValues={{
                                         updateUsername: store.getState().user.user,
                                         updateEmail: store.getState().user.email
-                                    }} />
+                                    }} onSubmit={this.submit.bind(this)} />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="#themes">
                                     theme settings
