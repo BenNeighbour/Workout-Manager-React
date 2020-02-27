@@ -6,11 +6,11 @@ const validate = values => {
         updateConfirmPassword: null
     };
     
-    if (!values.updatePassword) {
+    if (values.updatePassword === undefined) {
         errors.updatePassword = 'Required';
     }
 
-    if (!values.updateConfirmPassword) {
+    if (values.updateConfirmPassword === undefined) {
         errors.updateConfirmPassword = 'Required';
     }
 

@@ -21,11 +21,11 @@ let AccountInfoForm = props => {
                 setIsNotChangingPassword(!isNotChangingPassword)
             }}>Change Password</Button>
     
-            <Field name="updatePassword" label="Password"
+            <Field value={isNotChangingPassword === true ? null : undefined} name="updatePassword" label="Password"
                 type="password"
                 component={renderField} hidden={isNotChangingPassword} /> 
     
-            <Field label="Confirm New Password"
+            <Field value={isNotChangingPassword === true ? null : undefined} label="Confirm New Password"
                 name="updateConfirmPassword" type="password"
                 component={renderField} hidden={isNotChangingPassword} />
             <br />
@@ -42,9 +42,9 @@ let AccountInfoForm = props => {
     );
 }
 
-const renderField = ({ hidden, input, label, type, meta: { touched, error, warning } }) => (
+const renderField = ({ value, hidden, input, label, type, meta: { touched, error, warning } }) => (
     <div hidden={hidden} className="field">
-        <input disabled={hidden} {...input} style={{marginLeft: "3.5px", margin: "5px", width: "98%"}} className="form-control" placeholder={label} type={type} />
+        <input hidden={hidden} disabled={hidden} value={value} {...input} style={{marginLeft: "3.5px", margin: "5px", width: "97.3%"}} className="form-control" placeholder={label} type={type} />
 
         <div className="message">
             {touched && ((error && <p style={{ marginBottom: "0px", marginTop: "0px", color: "red"}}>{error}</p>) || (warning && <p>{warning}</p>))}
@@ -54,7 +54,7 @@ const renderField = ({ hidden, input, label, type, meta: { touched, error, warni
 
 AccountInfoForm = reduxForm({
     form: "AccountInfoForm",
-    validate,
+    validate: validate,
     enableReinitialize: true
 })(AccountInfoForm);
 

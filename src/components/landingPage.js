@@ -10,13 +10,16 @@ export default class LandingPage extends React.Component {
     render() {
         return (
             <div className="App">
-                <Navbar bg="primary" variant="dark" className="navbar">
+                <Navbar collapseOnSelect expand="sm" bg="primary" variant="dark" className="navbar">
                     <Navbar.Brand href="/">Workout Manager</Navbar.Brand>
-                    <Nav className="mr-auto">
-                        <Nav.Link onClick={this.redirect.bind(this, "/")}>Home</Nav.Link>
-                        <Nav.Link onClick={this.redirect.bind(this, "/login/")}>Log In</Nav.Link>
-                        <Nav.Link onClick={this.redirect.bind(this, "/signup/")}>Sign Up</Nav.Link>
-                    </Nav>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link onClick={this.redirect.bind(this, "/")}>Home</Nav.Link>
+                            <Nav.Link onClick={this.redirect.bind(this, "/login/")}>Log In</Nav.Link>
+                            <Nav.Link onClick={this.redirect.bind(this, "/signup/")}>Sign Up</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
                 </Navbar>
                 <header className="bg-primary py-5 mb-5" id="banner">
                     <div className="container h-100">
