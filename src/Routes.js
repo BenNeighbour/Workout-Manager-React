@@ -2,6 +2,7 @@ import React from 'react';
 import Page from "./components/home/page.js";
 import Login from "./components/login/loginView.js";
 import WorkoutPage from "./components/workout/info/workoutInfoPage.js";
+import ChangePasswordPage from "./components/changePassword/body/page.js";
 import LandingPage from "./components/landingPage.js";
 import NotFound from "./components/error/404.js";
 import WorkoutsPage from "./components/workouts/page.js";
@@ -53,8 +54,9 @@ class Routes extends React.Component {
             <PrivateRoute exact path='/workouts/add' component={AddWorkoutsPage} />
             <PrivateRoute exact path='/workouts/all' component={WorkoutsPage} />
             <PrivateRoute exact path='/workout/info' component={WorkoutPage} />
-            <PrivateRoute exact path='/profile/settings/' component={ProfileSettingsPage} />
+            <PrivateRoute exact path='/profile/settings' component={ProfileSettingsPage} />
             <GatewayRoute exact path="/login" component={Login} />
+            <GatewayRoute exact path="/changepassword" component={ChangePasswordPage} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/" component={LandingPage} />
             <Route path="*" component={NotFound} />

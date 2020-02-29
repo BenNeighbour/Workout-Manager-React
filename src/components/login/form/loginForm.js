@@ -19,7 +19,7 @@ let LoginForm = props => {
             <Field name="password" component={renderField} type="password"
                 label="Password" placeholder="Password" />
 
-            <a href="/verify/send" style={{ color: "#007bff", fontWeight: "90%", marginBottom: "12px"}}>Forgot Password?</a>
+            <a href="/changepassword/" style={{ color: "#007bff", fontWeight: "90%", marginBottom: "12px"}}>Forgot Password?</a>
             
             {
                 store.getState().user.error !== 200 ? <p style={{ color: "red", fontWeight: "90%", marginBottom: "12px", marginTop: "0px"}}>{`Error: ${store.getState().user.error}`}</p> : undefined
