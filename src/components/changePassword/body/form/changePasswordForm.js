@@ -9,16 +9,10 @@ let ChangePasswordForm = props => {
 
     return ( 
         <form onSubmit={handleSubmit} className="loginForm">
-            <h1 className="logo">Reset Password</h1>
+            <h1 className="logo">Change Password</h1>
             <Field
                 type="email" name="email" component={renderField}
                 label="Email Address" placeholder="Email Address" />
-        
-            <Field name="password" component={renderField} type="password"
-                label="Password" placeholder="Password" />
-            
-            <Field name="confirmPassword" component={renderField} type="password"
-                label="Confirm Password" placeholder="Confirm Password" />
             
             {
                 false ? <p style={{ color: "red", fontWeight: "90%", marginBottom: "12px", marginTop: "0px"}}>{`Error:`}</p> : undefined
