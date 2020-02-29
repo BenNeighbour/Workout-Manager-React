@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { reduxForm, Field } from "redux-form";
 import { Button } from 'react-bootstrap';
 import validate from "./validator/validate";
+import { withRouter } from 'react-router-dom';
 
 let AccountInfoForm = props => {
     const { handleSubmit } = props;
-    let [isNotChangingPassword, setIsNotChangingPassword] = useState(true);
 
     return (
         <form onSubmit={handleSubmit} className="App">
@@ -17,18 +17,9 @@ let AccountInfoForm = props => {
             <Field name="updateEmail" label="Email" type="email"
                 component={renderField} />
             
-            <Button variant="outline-primary" style={{margin: "3.5px"}} onClick={() => { 
-                setIsNotChangingPassword(!isNotChangingPassword)
+            <Button variant="outline-primary" style={{ margin: "3.5px" }} onClick={() => { 
+                props.history.push("/changepassword/")
             }}>Change Password</Button>
-    
-            <Field value={isNotChangingPassword === true ? null : undefined} name="updatePassword" label="Password"
-                type="password"
-                component={renderField} hidden={isNotChangingPassword} /> 
-    
-            <Field value={isNotChangingPassword === true ? null : undefined} label="Confirm New Password"
-                name="updateConfirmPassword" type="password"
-                component={renderField} hidden={isNotChangingPassword} />
-            <br />
             
             <Field label="Date of Birth"
                 name="updateDOB" type="date"
@@ -58,4 +49,4 @@ AccountInfoForm = reduxForm({
     enableReinitialize: true
 })(AccountInfoForm);
 
-export default AccountInfoForm;
+export default withRouter(AccountInfoForm);
