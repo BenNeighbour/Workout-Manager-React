@@ -5,7 +5,7 @@ import validate from "./validator/validate.js";
 
 let ChangePasswordForm = props => { 
     const { handleSubmit } = props;
-    const isEmailSent = true;
+    const isEmailSent = false;
 
     return ( 
         <form onSubmit={handleSubmit} className="loginForm">

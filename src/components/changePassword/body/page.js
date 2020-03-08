@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 
     return {
         credentialsPost: () => dispatch({
-            type: "USER_SIGNUP", payload: null
+            type: "USER_CHANGE_PASSWORD", payload: null
         })
     }
 };
