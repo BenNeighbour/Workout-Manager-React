@@ -56,7 +56,7 @@ class Routes extends React.Component {
             <PrivateRoute exact path='/workout/info' component={WorkoutPage} />
             <PrivateRoute exact path='/profile/settings' component={ProfileSettingsPage} />
             <GatewayRoute exact path="/login" component={Login} />
-            <GatewayRoute exact path="/changepassword" component={ChangePasswordPage} />
+            <Route exact path="/changepassword" component={ChangePasswordPage} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/" component={LandingPage} />
             <Route path="*" component={NotFound} />
