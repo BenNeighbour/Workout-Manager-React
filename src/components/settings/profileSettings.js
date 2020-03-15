@@ -7,8 +7,8 @@ class ProfileSettingsPage extends React.Component {
     render() {
         return (
             <div>
-                <Nav />
-                <Body />
+                <Nav theme={this.props.theme} variant={this.props.variant} />
+                <Body theme={this.props.theme} variant={this.props.variant} />
             </div>
         );
     }

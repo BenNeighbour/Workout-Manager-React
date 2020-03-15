@@ -10,8 +10,8 @@ class WorkoutPage extends Component {
   render() {
       return ( 
         <div>
-            <Navigation />
-            <Body id={this.props.currentWorkoutId} />
+            <Navigation theme={this.props.theme} variant={this.props.variant} />
+            <Body id={this.props.currentWorkoutId} theme={this.props.theme} variant={this.props.variant} />
         </div>
     );
   }

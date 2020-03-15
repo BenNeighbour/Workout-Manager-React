@@ -12,6 +12,14 @@ import axios from "axios";
 import { connect } from "react-redux";
 
 class Body extends Component { 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: true,
+      isLoaded: false
+    }
+  }
 
   redirect = values => {
     this.props.postPointingWid(values);
@@ -19,15 +27,23 @@ class Body extends Component {
   } 
 
   getProperties = async () => { 
-    const url = "http://localhost:8080/api/v1/user/username/by/" + store.getState().user.user +"/?access_token=" + store.getState().user.accessToken;
+    const url = "http://localhost:8080/api/v1/user/username/by/" + store.getState().user.user + "/?access_token=" + store.getState().user.accessToken;
+    this.setState({ isLoading: false });
+    this.setState({ isLoaded: true });
     await this.props.userPropertiesGet(url);
     await this.props.userWorkoutsGet(url);
   }
 
-  componentDidMount() { 
-    this.getProperties();
+  componentDidMount() {
+    if (this.state.isLoading === true && !this.state.isLoaded) {
+      const url = "http://localhost:8080/api/v1/user/username/by/" + store.getState().user.user + "/?access_token=" + store.getState().user.accessToken;
+      this.props.userPropertiesGet(url);
+      this.props.userWorkoutsGet(url);
+      this.setState({ isLoading: false });
+      this.setState({ isLoaded: true });
+      return;
+    } 
   }
-
 
   render() {
     return (
@@ -40,7 +56,7 @@ class Body extends Component {
               <b>Duration: </b> {card.duration} minutes<br />
               {card.description}
             </Card.Text>
-            <Button variant="outline-primary" onClick={this.redirect.bind(this, card.wid)}>Details</Button>
+            <Button variant={`outline-${this.props.theme}`} onClick={this.redirect.bind(this, card.wid)}>Details</Button>
           </Card.Body>
         </Card>
       ))

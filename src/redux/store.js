@@ -9,7 +9,7 @@ import reducer from "./reducers/combinedReducers.js";
 const persistConfig = {
     key: 'User',
     storage: storage,
-    whitelist: ['user', 'workout'] 
+    whitelist: ['user', 'workout', 'themeReducer'] 
 };
 const persistedReducer = persistReducer(persistConfig, reducer);
 

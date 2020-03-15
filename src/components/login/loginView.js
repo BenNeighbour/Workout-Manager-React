@@ -14,9 +14,13 @@ import "./loginView.css";
 class Login extends Component { 
 
   submit = async () => { 
-    const url = "http://localhost:8080/oauth/token?grant_type=password&username=" + this.props.credentials.username + "&password=" + this.props.credentials.password;
-    await this.props.submitCredentials(url);
+    const url1 = "http://localhost:8080/api/v1/user/login/?grant_type=password&username=" + this.props.credentials.username + "&password=" + this.props.credentials.password;
+    await this.props.submitCredentials(url1);
+
     this.redirect();
+
+    const url2 = "http://localhost:8080/api/v1/user/username/by/" + store.getState().user.user + "/?access_token=" + store.getState().user.accessToken;
+    await this.props.userPropertiesGet(url2)
   }
 
   redirect = values => {
@@ -61,6 +65,11 @@ const mapDispatchToProps = (dispatch) => {
           {},
           config
         )
+    }),
+
+    userPropertiesGet: (url) => dispatch({
+      type: "USER_UID", payload:
+        axios.get(url)
     }),
 
     logout: () => dispatch({type: "USER_LOGOUT"})

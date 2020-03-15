@@ -46,15 +46,66 @@ class Routes extends React.Component {
   }
 
   render() {
+    let theme;
+    let variant = "dark";
+    let number = store.getState().user.theme_id
+
+    switch (number) { 
+        case (1): { 
+          theme = "primary"
+          break;
+        }
+        case (2): { 
+          theme = "secondary"
+          break;
+        }
+        case (3): { 
+          theme = "danger"
+          break;
+        }
+        case (4): { 
+          theme = "success"
+          break;
+        }
+        case (5): { 
+          theme = "warning"
+          break;
+        }
+        case (6): { 
+          theme = "info"
+          break;
+        }
+        case (7): { 
+          variant = "light"
+          theme = "light"
+          break;
+        }
+        case (8): { 
+          variant = "dark"
+          theme = "dark"
+          break;
+        }
+        
+        default: { 
+          theme = "primary"
+          break;
+        }
+    }
+
+    if (number > 8) { 
+      store.dispatch({ type: "THEME_CHANGE", payload: 1 })
+    }
+
+
     return (
       <div className="App">
         <Route>
           <Switch>
-            <PrivateRoute exact path='/home' component={Page} />
-            <PrivateRoute exact path='/workouts/add' component={AddWorkoutsPage} />
-            <PrivateRoute exact path='/workouts/all' component={WorkoutsPage} />
-            <PrivateRoute exact path='/workout/info' component={WorkoutPage} />
-            <PrivateRoute exact path='/profile/settings' component={ProfileSettingsPage} />
+            <PrivateRoute exact path='/home' component={Page} theme={theme} variant={variant} />
+            <PrivateRoute exact path='/workouts/add' component={AddWorkoutsPage} theme={theme} variant={variant} />
+            <PrivateRoute exact path='/workouts/all' component={WorkoutsPage} theme={theme} variant={variant} />
+            <PrivateRoute exact path='/workout/info' component={WorkoutPage} theme={theme} variant={variant} />
+            <PrivateRoute exact path='/profile/settings' component={ProfileSettingsPage} theme={theme} variant={variant} />
             <GatewayRoute exact path="/login" component={Login} />
             <Route exact path="/changepassword" component={ChangePasswordPage} />
             <Route exact path="/signup" component={Signup} />

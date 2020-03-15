@@ -5,6 +5,12 @@ import { Navbar, Nav } from "react-bootstrap";
 import { withRouter } from 'react-router-dom';
 
 class Navigation extends Component { 
+  constructor(props) { 
+    super(props);
+
+    this.state = {};
+  }
+
   redirect(page) { 
     this.props.history.push(`${page}`)
   }
@@ -15,9 +21,10 @@ class Navigation extends Component {
   }
 
   render() {
+
     return (
       <div>
-        <Navbar sticky="top" bg="primary" variant="dark" className="navbar" collapseOnSelect expand="sm">
+        <Navbar sticky="top" bg={this.props.theme} variant={this.props.variant} className="navbar" collapseOnSelect expand="sm">
           <Navbar.Brand href="/">Workout Manager</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">

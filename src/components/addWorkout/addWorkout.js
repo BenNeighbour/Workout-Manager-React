@@ -21,9 +21,9 @@ class AddWorkoutPage extends Component {
   render() {
     return (
         <div className="App">
-          <Navigation />
+          <Navigation theme={this.props.theme} variant={this.props.variant} />
           <h1 id="header">Add Workout</h1>
-          <Body submit={this.submit.bind(this)}/>
+          <Body submit={this.submit.bind(this)} theme={this.props.theme} variant={this.props.variant} />
         </div>
     );
   }

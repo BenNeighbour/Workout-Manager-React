@@ -8,8 +8,8 @@ class Page extends Component {
   render() {
     return (
       <div className="App">
-        <Navigation />
-        <Body />
+        <Navigation theme={this.props.theme} variant={this.props.variant} />
+        <Body theme={this.props.theme} variant={this.props.variant} />
       </div>
     );
   }

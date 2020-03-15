@@ -11,6 +11,7 @@ const initalstate = {
     refreshToken: null,
     accessToken: null,
     signedUp: false,
+    theme_id: 1
 }
 
 export default function reducer(state = initalstate, action) { 
@@ -43,8 +44,9 @@ export default function reducer(state = initalstate, action) {
             };
         }
         case "USER_UID_FULFILLED": {
+            window.location.reload(false);
             return {
-                ...state, uid: action.payload.data.uid, email: action.payload.data.email
+                ...state, uid: action.payload.data.uid, email: action.payload.data.email, theme_id: action.payload.data.themeIndex
             };
         }  
         case "ADD_USERNAME": { 
@@ -79,6 +81,13 @@ export default function reducer(state = initalstate, action) {
             
         case "UNMOUNT_EMAIL_MESSAGE": { 
             return { ...state, signedUp: false };
+        }
+            
+        case "THEME_CHANGE": { 
+            window.location.reload(false);
+            return {
+                ...state, theme_id: action.payload
+            };
         }
             
         default: { 

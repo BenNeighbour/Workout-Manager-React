@@ -14,13 +14,13 @@ export default class WorkoutsPage extends Component {
   render() {
     return (
       <div className="App">
-        <Navigation />
-        <h1 id="header">Your Workouts</h1>
-        <Body />
+        <Navigation theme={this.props.theme} variant={this.props.variant} />
+        <h1 id="header" style={{color: `var(--${this.props.theme})`}}>Your Workouts</h1>
+        <Body theme={this.props.theme} variant={this.props.variant} />
         <Card className="workoutCard">
           <Card.Body className="add-card">
             <Button onClick={this.redirect.bind(this, "/workouts/add/")} className="add-card-btn">
-              <AddBoxOutlinedIcon />
+              <AddBoxOutlinedIcon style={{color: `var(--${this.props.theme})`}} />
             </Button> 
           </Card.Body>
         </Card>
