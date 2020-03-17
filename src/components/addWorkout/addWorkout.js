@@ -7,6 +7,7 @@ import "./addWorkout.css";
 import { Body } from './body/body.js';
 import axios from "axios";
 import { getFormValues } from 'redux-form';
+import Loading from '../loading/loading.js';
 
 class AddWorkoutPage extends Component {
   submit = values => {
@@ -19,13 +20,17 @@ class AddWorkoutPage extends Component {
   }
 
   render() {
-    return (
+    if (this.props.theme !== null) {
+      return (
         <div className="App">
           <Navigation theme={this.props.theme} variant={this.props.variant} />
           <h1 id="header">Add Workout</h1>
           <Body submit={this.submit.bind(this)} theme={this.props.theme} variant={this.props.variant} />
         </div>
-    );
+      );
+    } else { 
+      return <Loading />
+    }
   }
 }
 

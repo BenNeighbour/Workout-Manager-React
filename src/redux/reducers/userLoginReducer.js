@@ -11,7 +11,7 @@ const initalstate = {
     refreshToken: null,
     accessToken: null,
     signedUp: false,
-    theme_id: 1
+    theme_id: null
 }
 
 export default function reducer(state = initalstate, action) { 

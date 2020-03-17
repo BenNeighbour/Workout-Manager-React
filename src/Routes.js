@@ -8,6 +8,7 @@ import NotFound from "./components/error/404.js";
 import WorkoutsPage from "./components/workouts/page.js";
 import AddWorkoutsPage from "./components/addWorkout/addWorkout.js";
 import PrivateRoute from "./routeTypes/PrivateRoute";
+import ContextRoute from "./routeTypes/ContextRoute";
 import GatewayRoute from "./routeTypes/GatewayRoute";
 import Signup from "./components/signup/signupView.js";
 import ProfileSettingsPage from "./components/settings/profileSettings.js";
@@ -46,56 +47,53 @@ class Routes extends React.Component {
   }
 
   render() {
-    let theme;
+    let theme = "";
     let variant = "dark";
     let number = store.getState().user.theme_id
 
-    switch (number) { 
-        case (1): { 
-          theme = "primary"
-          break;
-        }
-        case (2): { 
-          theme = "secondary"
-          break;
-        }
-        case (3): { 
-          theme = "danger"
-          break;
-        }
-        case (4): { 
-          theme = "success"
-          break;
-        }
-        case (5): { 
-          theme = "warning"
-          break;
-        }
-        case (6): { 
-          theme = "info"
-          break;
-        }
-        case (7): { 
-          variant = "light"
-          theme = "light"
-          break;
-        }
-        case (8): { 
-          variant = "dark"
-          theme = "dark"
-          break;
-        }
-        
-        default: { 
-          theme = "primary"
-          break;
-        }
+    switch (number) {
+      case (1): {
+        theme = "primary"
+        break;
+      }
+      case (2): {
+        theme = "secondary"
+        break;
+      }
+      case (3): {
+        theme = "danger"
+        break;
+      }
+      case (4): {
+        theme = "success"
+        break;
+      }
+      case (5): {
+        theme = "warning"
+        break;
+      }
+      case (6): {
+        theme = "info"
+        break;
+      }
+      case (7): {
+        variant = "light"
+        theme = "light"
+        break;
+      }
+      case (8): {
+        theme = "dark"
+        break;
+      }
+      
+      default: {
+        theme = null
+      }
     }
 
-    if (number > 8) { 
-      store.dispatch({ type: "THEME_CHANGE", payload: 1 })
+    if (number > 8) {
+      store.dispatch({ type: "THEME_CHANGE", payload: 8 })
     }
-
 
     return (
       <div className="App">
@@ -104,7 +102,7 @@ class Routes extends React.Component {
             <PrivateRoute exact path='/home' component={Page} theme={theme} variant={variant} />
             <PrivateRoute exact path='/workouts/add' component={AddWorkoutsPage} theme={theme} variant={variant} />
             <PrivateRoute exact path='/workouts/all' component={WorkoutsPage} theme={theme} variant={variant} />
-            <PrivateRoute exact path='/workout/info' component={WorkoutPage} theme={theme} variant={variant} />
+            <ContextRoute exact path='/workout/info' component={WorkoutPage} theme={theme} variant={variant} />
             <PrivateRoute exact path='/profile/settings' component={ProfileSettingsPage} theme={theme} variant={variant} />
             <GatewayRoute exact path="/login" component={Login} />
             <Route exact path="/changepassword" component={ChangePasswordPage} />
@@ -115,6 +113,7 @@ class Routes extends React.Component {
         </Route>
       </div>
     );
+    
   }
 }
 

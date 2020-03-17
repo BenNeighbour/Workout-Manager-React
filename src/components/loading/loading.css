@@ -1,0 +1,31 @@
+html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.loading-bar {
+    width: 65vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-63%);
+    text-align: center;
+}
+
+.logo {
+    height: 100%;
+    padding-bottom: 25px;
+    font-weight: 50;
+    color: #007bff;
+}
+
+.logo-message {
+    height: 100%;
+    font-size: 120%;
+    padding-bottom: 25px;
+    font-weight: 50;
+    color: #007bff;
+}

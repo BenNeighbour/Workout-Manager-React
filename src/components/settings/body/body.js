@@ -8,8 +8,6 @@ import ThemeSwitcher from './form/themeSwitcher.js';
 class Body extends React.Component {
 
     submit = async values => { 
-        // Make PUT request to server with the new User.
-
         this.props.history.push("/login");
         store.dispatch({type: "USER_LOGOUT"});
     }

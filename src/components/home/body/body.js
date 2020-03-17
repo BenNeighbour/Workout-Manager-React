@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./body.css";
-import { Spinner } from "react-bootstrap"; 
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { store } from "../../../redux/store.js";
@@ -24,7 +23,7 @@ class Body extends Component {
     const currentState = store.getState().user.error === 200;
     while (currentState === false) { 
       return (
-        <Spinner animation="border" role="status" />
+        store.dispatch({type: "USER_LOGOUT"})
       );
     }
 

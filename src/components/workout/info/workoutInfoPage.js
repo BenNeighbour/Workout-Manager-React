@@ -5,16 +5,21 @@ import { withRouter } from "react-router-dom";
 import Navigation from "../../home/nav/nav.js";
 
 import { connect } from "react-redux";
+import Loading from '../../loading/loading.js';
 
 class WorkoutPage extends Component { 
-  render() {
-      return ( 
-        <div>
-            <Navigation theme={this.props.theme} variant={this.props.variant} />
-            <Body id={this.props.currentWorkoutId} theme={this.props.theme} variant={this.props.variant} />
-        </div>
-    );
-  }
+    render() {
+        if (this.props.theme !== null) {
+            return (
+                <div>
+                    <Navigation theme={this.props.theme} variant={this.props.variant} />
+                    <Body id={this.props.currentWorkoutId} theme={this.props.theme} variant={this.props.variant} />
+                </div>
+            );
+        } else { 
+            return <Loading />
+        }
+    }
 }
 
 const mapStateToProps = (state) => {

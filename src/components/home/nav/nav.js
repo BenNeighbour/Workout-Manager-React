@@ -22,22 +22,26 @@ class Navigation extends Component {
 
   render() {
 
-    return (
-      <div>
-        <Navbar sticky="top" bg={this.props.theme} variant={this.props.variant} className="navbar" collapseOnSelect expand="sm">
-          <Navbar.Brand href="/">Workout Manager</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link onClick={this.redirect.bind(this, "/home/")}>Home</Nav.Link>
-              <Nav.Link onClick={this.redirect.bind(this, "/workouts/all/")}>Workouts</Nav.Link>
-              <Nav.Link onClick={this.redirect.bind(this, "/profile/settings/")}>Your Profile</Nav.Link>
-              <Nav.Link onClick={this.logout.bind(this)}>Sign Out</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </div>
-    );
+    if (this.props.theme != null) {
+      return (
+        <div>
+          <Navbar sticky="top" bg={this.props.theme} variant={this.props.variant} className="navbar" collapseOnSelect expand="sm">
+            <Navbar.Brand href="/">Workout Manager</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link onClick={this.redirect.bind(this, "/home/")}>Home</Nav.Link>
+                <Nav.Link onClick={this.redirect.bind(this, "/workouts/all/")}>Workouts</Nav.Link>
+                <Nav.Link onClick={this.redirect.bind(this, "/profile/settings/")}>Your Profile</Nav.Link>
+                <Nav.Link onClick={this.logout.bind(this)}>Sign Out</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+        </div>
+      );
+    } else { 
+      return <div className="navbar"></div>
+    }
   }
 }
 
