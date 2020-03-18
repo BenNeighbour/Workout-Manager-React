@@ -34,6 +34,23 @@ export default function reducer(state = initalstate, action) {
             };
         }
         
+        case "HOME_USER_UID_PENDING": {
+            return {
+                ...state
+            };
+        }
+        case "HOME_USER_UID_REJECTED": {
+            return {
+                ...state, error: action.payload.status, isAuthenticated: false
+            };
+        }
+        case "HOME_USER_UID_FULFILLED": {
+            window.location.reload();
+            return {
+                ...state, uid: action.payload.data.uid, email: action.payload.data.email, theme_id: action.payload.data.themeIndex, loaded: true
+            };
+        }  
+            
         case "USER_UID_PENDING": {
             return {
                 ...state
@@ -45,11 +62,11 @@ export default function reducer(state = initalstate, action) {
             };
         }
         case "USER_UID_FULFILLED": {
-            window.location.reload();
             return {
                 ...state, uid: action.payload.data.uid, email: action.payload.data.email, theme_id: action.payload.data.themeIndex, loaded: true
             };
         }  
+            
         case "ADD_USERNAME": { 
             return {...state, user: action.payload}
         }

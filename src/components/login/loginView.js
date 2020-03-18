@@ -72,7 +72,7 @@ const mapDispatchToProps = (dispatch) => {
     }),
 
     userPropertiesGet: (url) => dispatch({
-      type: "USER_UID", payload:
+      type: "HOME_USER_UID", payload:
         axios.get(url)
     }),
 

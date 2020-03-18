@@ -13,12 +13,6 @@ class Body extends Component {
     }
   }
 
-  componentDidMount() { 
-    if (!this.state.isLoading) {
-      window.location.reload(false);
-    }
-  }
-
   render() {
     const currentState = store.getState().user.error === 200;
     while (currentState === false) { 

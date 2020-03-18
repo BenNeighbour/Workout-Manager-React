@@ -4,6 +4,7 @@ import { Button, Card } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import img from "./sample_img.jpg";
 import { store } from "../../../redux/store.js";
+import Loading from "../../loading/loading.js";
 import axios from "axios";
 import { connect } from "react-redux";
 
