@@ -44,7 +44,7 @@ export default function reducer(state = initalstate, action) {
             };
         }
         case "USER_UID_FULFILLED": {
-            window.location.reload(false);
+            window.location.reload.bind(false);
             return {
                 ...state, uid: action.payload.data.uid, email: action.payload.data.email, theme_id: action.payload.data.themeIndex
             };

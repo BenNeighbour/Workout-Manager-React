@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import "./loading.css";
-import ThemeLoading from './themedLoading';
 
 const ColorLinearProgress = withStyles({
   colorPrimary: {
     backgroundColor: '#f2f2f2',
   },
   barColorPrimary: {
-    backgroundColor: 'var(--primary)',
+    backgroundColor: `var(--sd)`,
   },
 })(LinearProgress);
 
@@ -23,22 +22,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 let LoadingComponent = props => { 
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-    <div className="loading-bar">
-      <h1 className="logo">Workout Manager</h1>
-      <ColorLinearProgress className={classes.margin} id="loader" />
-      <h3 className="logo-message">{props.message}</h3>
-    </div>
-  );
+    return (
+        <div className="loading-bar">
+            <h1 className="logo">Workout Manager</h1>
+            <ColorLinearProgress className={classes.margin} id="loader" />
+            <h3 className="logo-message">{props.message}</h3>
+        </div>
+    );
   
 }   
 
-class Loading extends Component {
+class ThemeLoading extends Component {
   render() {
     return <LoadingComponent message={this.props.message} />
   }
 }
 
-export default Loading;
+export default (ThemeLoading);

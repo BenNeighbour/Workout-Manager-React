@@ -6,6 +6,10 @@ import { connect } from "react-redux";
 import Loading from '../loading/loading.js';
 
 class Page extends Component {
+  constructor(props) { 
+    super(props);
+  }
+
   render() {
     if (this.props.theme !== null) {
       return (

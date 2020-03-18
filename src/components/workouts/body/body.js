@@ -14,11 +14,6 @@ import { connect } from "react-redux";
 class Body extends Component { 
   constructor(props) {
     super(props);
-
-    this.state = {
-      isLoading: true,
-      isLoaded: false
-    }
   }
 
   redirect = values => {
@@ -28,21 +23,12 @@ class Body extends Component {
 
   getProperties = async () => { 
     const url = "http://localhost:8080/api/v1/user/username/by/" + store.getState().user.user + "/?access_token=" + store.getState().user.accessToken;
-    this.setState({ isLoading: false });
-    this.setState({ isLoaded: true });
     await this.props.userPropertiesGet(url);
     await this.props.userWorkoutsGet(url);
   }
 
-  componentDidMount() {
-    if (this.state.isLoading === true && !this.state.isLoaded) {
-      const url = "http://localhost:8080/api/v1/user/username/by/" + store.getState().user.user + "/?access_token=" + store.getState().user.accessToken;
-      this.props.userPropertiesGet(url);
-      this.props.userWorkoutsGet(url);
-      this.setState({ isLoading: false });
-      this.setState({ isLoaded: true });
-      return;
-    } 
+  componentDidMount() { 
+    this.getProperties();
   }
 
   render() {
