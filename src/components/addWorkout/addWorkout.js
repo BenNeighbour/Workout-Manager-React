@@ -24,7 +24,7 @@ class AddWorkoutPage extends Component {
       return (
         <div className="App">
           <Navigation theme={this.props.theme} variant={this.props.variant} />
-          <h1 id="header">Add Workout</h1>
+          <h1 id="header" style={{color: `var(--${this.props.theme})`}}>Add Workout</h1>
           <Body submit={this.submit.bind(this)} theme={this.props.theme} variant={this.props.variant} />
         </div>
       );

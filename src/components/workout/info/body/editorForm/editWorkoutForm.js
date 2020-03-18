@@ -6,19 +6,21 @@ import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { store } from "./../../../../../redux/store.js";
 import axios from "axios";
+import "./editForm.css";
 
 let EditForm = props => {
     const { handleSubmit } = props;
+    document.documentElement.style.setProperty("--custom", `var(--${props.theme})`);
 
     return ( 
         <form onSubmit={handleSubmit} className="editForm">
-            <h1 id="header">Edit</h1>
-            <b className="name">Name:</b>
+            <h1 id="header" style={{color: `var(--${props.theme})`}}>Edit</h1>
+            <b className="name" style={{color: `var(--${props.theme})`}}>Name:</b>
             <Field
                 type="text" name="name" component={renderField}
                 id="name" label="Workout Name" />
             
-            <b className="description">Description:</b>
+            <b className="description" style={{color: `var(--${props.theme})`}}>Description:</b>
             <Field type="text" name="description" component={renderField} label="Description" />
 
             <Tabs defaultActiveKey={0} style={{margin: "22.5px", overflowY: "hidden"}}>
@@ -26,22 +28,22 @@ let EditForm = props => {
                     props.exerciseList.map((exercise, index) => (
                         <Tab eventKey={`${exercise.name} ${index} ${exercise.eid}`} key={index} id="header" title={exercise.name}>
 
-                            <b style={{ fontSize: "125%", paddingLeft: "6px" }} className="name" key={`${exercise.name} reps ${index}`}>Reps:</b>
+                            <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name" key={`${exercise.name} reps ${index}`}>Reps:</b>
                             <Field
                                 type="number" name={`exercises[${index}].reps`} component={renderField}
                                 label="Reps" />
 
-                            <b style={{ fontSize: "125%", paddingLeft: "6px" }} className="name" key={`${exercise.name} sets ${index}`}>Sets:</b>
+                            <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name" key={`${exercise.name} sets ${index}`}>Sets:</b>
                             <Field
                                 type="number" name={`exercises[${index}].sets`} component={renderField}
                                 label="Sets" />
                             
-                            <b style={{ fontSize: "125%", paddingLeft: "6px" }} className="name" key={`${exercise.name} duration ${index}`}>Duration:</b>
+                            <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name" key={`${exercise.name} duration ${index}`}>Duration:</b>
                             <Field
                                 type="number" name={`exercises[${index}].duration`} component={renderField}
                                 label="Duration" />
                             
-                            <b style={{ fontSize: "125%", paddingLeft: "6px" }} className="name" key={`${exercise.name} calsBurnt ${index}`}>Calories Burnt:</b>
+                            <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name" key={`${exercise.name} calsBurnt ${index}`}>Calories Burnt:</b>
                             <Field
                                 type="number" name={`exercises[${index}].burntCals`} component={renderField}
                                 label="Calories Burnt" />
@@ -53,27 +55,27 @@ let EditForm = props => {
                 <Tab eventKey="divider" title="  " disabled></Tab>
                 
                 <Tab eventKey="" id="header" title="Add">
-                    <b style={{ fontSize: "125%", paddingLeft: "6px" }} className="name" >Name:</b>
+                    <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name" >Name:</b>
                     <Field
                         type="text" name="addName" component={renderField}
                         label="Name" />
 
-                    <b style={{ fontSize: "125%", paddingLeft: "6px" }} className="name" >Reps:</b>
+                    <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name" >Reps:</b>
                     <Field
                         type="number" name="addReps" component={renderField}
                         label="Reps" />
 
-                    <b style={{ fontSize: "125%", paddingLeft: "6px" }} className="name">Sets:</b>
+                    <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name">Sets:</b>
                     <Field
                         type="number" name="addSets" component={renderField}
                         label="Sets" />
 
-                    <b style={{ fontSize: "125%", paddingLeft: "6px" }} className="name">Duration:</b>
+                    <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name">Duration:</b>
                     <Field
                         type="number" name="addDuration" component={renderField}
                         label="Duration" />
 
-                    <b style={{ fontSize: "125%", paddingLeft: "6px" }} className="name">Calories Burnt:</b>
+                    <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name">Calories Burnt:</b>
                     <Field
                         type="number" name="addCalsBurnt" component={renderField}
                         label="Calories Burnt" />
@@ -98,8 +100,8 @@ let EditForm = props => {
                 </Tab>
             </Tabs>
             
-            <Button type="button" variant="outline-primary">Back</Button>
-            <Button variant="outline-primary" type="submit">Save</Button>
+            <Button type="button" variant={`outline-${props.theme}`}>Back</Button>
+            <Button variant={`outline-${props.theme}`} type="submit">Save</Button>
         </form>
     );
     
@@ -114,7 +116,7 @@ let submitNewExercise = (exercises, helper) => {
 
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
     <div className="field">
-        <input {...input} className="form-control" placeholder={label} type={type} id="duration" />
+        <input {...input} className="form-control" placeholder={label} type={type} id="custom-field" />
 
         <div className="message">
             {touched && ((error && <p style={{ marginBottom: "0px", marginTop: "0px", color: "red" }}>{error}</p>) || (warning && <p>{warning}</p>))}

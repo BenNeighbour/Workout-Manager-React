@@ -39,6 +39,7 @@ class Loading extends Component {
   render() {
     return <LoadingComponent message={this.props.message} />
   }
+
 }
 
 export default Loading;

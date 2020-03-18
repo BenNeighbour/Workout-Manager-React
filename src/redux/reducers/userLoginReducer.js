@@ -11,7 +11,8 @@ const initalstate = {
     refreshToken: null,
     accessToken: null,
     signedUp: false,
-    theme_id: null
+    theme_id: null,
+    loaded: false
 }
 
 export default function reducer(state = initalstate, action) { 
@@ -44,9 +45,9 @@ export default function reducer(state = initalstate, action) {
             };
         }
         case "USER_UID_FULFILLED": {
-            window.location.reload.bind(false);
+            window.location.reload();
             return {
-                ...state, uid: action.payload.data.uid, email: action.payload.data.email, theme_id: action.payload.data.themeIndex
+                ...state, uid: action.payload.data.uid, email: action.payload.data.email, theme_id: action.payload.data.themeIndex, loaded: true
             };
         }  
         case "ADD_USERNAME": { 
