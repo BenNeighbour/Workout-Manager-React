@@ -2,6 +2,7 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from "react-bootstrap";
 import validate from "./validator/validate.js";
+import { withRouter } from 'react-router-dom';
 
 let ChangePasswordForm = props => { 
     const { handleSubmit } = props;
@@ -25,6 +26,12 @@ let ChangePasswordForm = props => {
             <div className="submit-btn">
                 <Button type="submit" variant="outline-primary" className="submit-btn">Send Verification Email</Button>
             </div>
+            <p className="or">---- or ----</p>
+            <div className="submit-btn">
+                <Button variant="outline-primary" className="submit-btn" onClick={() => { 
+                    props.history.push("/login")
+                }}>Sign In to Your Account</Button>
+            </div>
         </form>
     );
 }
@@ -44,4 +51,4 @@ ChangePasswordForm = reduxForm({
     validate
 })(ChangePasswordForm);
 
-export default ChangePasswordForm;
+export default withRouter(ChangePasswordForm);

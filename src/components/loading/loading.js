@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import "./loading.css";
-import ThemeLoading from './themedLoading';
 
 const ColorLinearProgress = withStyles({
   colorPrimary: {

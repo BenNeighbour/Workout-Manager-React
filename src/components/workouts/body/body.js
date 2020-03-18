@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import "./body.css";
-
 import { Button, Card } from "react-bootstrap"; 
 import { withRouter } from "react-router-dom";
 import img from "./sample_img.jpg";
-
 import { store } from "../../../redux/store.js";
-
 import axios from "axios";
-
 import { connect } from "react-redux";
 
 class Body extends Component { 
-  constructor(props) {
-    super(props);
-  }
 
   redirect = values => {
     this.props.postPointingWid(values);

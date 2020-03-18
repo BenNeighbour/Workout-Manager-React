@@ -7,10 +7,6 @@ import Loading from '../loading/loading.js';
 import { store } from '../../redux/store.js';
 
 class Page extends Component {
-  constructor(props) { 
-    super(props);
-  }
-
   render() {
     if (this.props.theme !== null || store.getState().user.loaded !== false) {
       return (
