@@ -18,14 +18,17 @@ export default class WorkoutsPage extends Component {
         <div className="App">
           <Navigation theme={this.props.theme} variant={this.props.variant} />
           <h1 id="header" style={{ color: `var(--${this.props.theme})` }}>Your Workouts</h1>
-          <Body theme={this.props.theme} variant={this.props.variant} />
-          <Card className="workoutCard">
-            <Card.Body className="add-card">
-              <Button onClick={this.redirect.bind(this, "/workouts/add/")} className="add-card-btn">
-                <AddBoxOutlinedIcon style={{ color: `var(--${this.props.theme})` }} />
-              </Button>
-            </Card.Body>
-          </Card>
+
+          <div className="card-container">
+            <Body theme={this.props.theme} variant={this.props.variant} />
+              <Card className="workoutCard">
+              <Card.Body className="add-card">
+                <Button onClick={this.redirect.bind(this, "/workouts/add/")} className="add-card-btn">
+                  <AddBoxOutlinedIcon style={{ color: `var(--${this.props.theme})` }} />
+                </Button>
+              </Card.Body>
+            </Card>
+          </div>
         </div>
       );
     } else { 

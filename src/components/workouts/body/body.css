@@ -1,23 +1,32 @@
 * {
     box-sizing: border-box;
     overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.card-container {
+    display: inline-flex;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    align-content: center;
 }
 
 body .workoutCard {
     display: inline-block;
-    width: 31.45%;
-    height: 50vh;
-    max-height: 50vh;
-    padding: 10px;
 }
 body .workoutCard {
    padding: 1px;
    float: left;
+   width: 29%;
    margin-left: 1vh;
-   margin-right: 6.5px;
+   margin-right: 1vh;
    margin-top: 7.5px;
    margin-bottom: 7.5px;
    overflow: hidden;
+}
+
+body .workoutCard .card-body {
+    object-fit: contain; 
 }
 
 body .workoutCard ::-webkit-scrollbar {
@@ -31,12 +40,12 @@ body:after {
   
 
 @media screen and (max-width: 600px) {
+    .card-container {
+        display: grid;
+    }
     body .workoutCard {
-        float: left;
-        max-height: 110%;
-        width: 96%;
-        margin-left: none;
-        margin-left: none;
-        margin-top: 15px;
+        display: inline-block;
+        width: fit-content;
+        overflow: hidden;
     }
 }

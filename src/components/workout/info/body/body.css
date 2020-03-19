@@ -200,3 +200,7 @@
     font-size: 145%;    
     font-weight: 50;
 }
+
+.nav-tabs .nav-item.show .nav-link a:focus-within {
+    color: white;
+}
