@@ -101,10 +101,19 @@ export default function reducer(state = initalstate, action) {
             return { ...state, signedUp: false };
         }
             
-        case "THEME_CHANGE": { 
-            window.location.reload(false);
+        case "THEME_CHANGE_PENDING": { 
             return {
-                ...state, theme_id: action.payload
+                ...state
+            };
+        }
+        case "THEME_CHANGE_ERROR": { 
+            return {
+                ...state, error: action.payload.data.error_description
+            };
+        }
+        case "THEME_CHANGE_FULFILLED": { 
+            return {
+                ...state, theme_id: action.payload.data.message
             };
         }
             

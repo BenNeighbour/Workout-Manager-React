@@ -6,16 +6,16 @@ import Loading from '../loading/loading.js';
 
 class ProfileSettingsPage extends React.Component {
     render() {
-        if (this.props.theme !== null) {
+        while (this.props.theme !== null) {
             return (
                 <div>
                     <Nav theme={this.props.theme} variant={this.props.variant} />
                     <Body theme={this.props.theme} variant={this.props.variant} />
                 </div>
             );
-        } else { 
-            return <Loading />
-        }
+        } 
+        return <Loading message="You got me." />
+        
     }
 }
 

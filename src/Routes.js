@@ -21,7 +21,7 @@ import { connect } from "react-redux";
 class Routes extends React.Component {
 
   sessionRefresh = () => {
-    const url = `http://localhost:8080/oauth/token?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`
+    const url = `http://localhost:8080/api/v1/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`
   
     setInterval(() =>
       this.intervalHelper(url),
@@ -47,7 +47,7 @@ class Routes extends React.Component {
   }
 
   render() {
-    let theme = "";
+    let theme = null;
     let variant = "dark";
     let number = store.getState().user.theme_id
 
@@ -87,12 +87,8 @@ class Routes extends React.Component {
       }
       
       default: {
-        theme = null
+        break;
       }
-    }
-
-    if (number > 8) {
-      store.dispatch({ type: "THEME_CHANGE", payload: 8 })
     }
 
     return (

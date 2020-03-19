@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { ListGroup, Tab, Col, Row } from "react-bootstrap";
 import AccountInfoForm from "./form/accountInfoForm.js";
 import { store } from '../../../redux/store.js';
-import ThemeSwitcher from './form/themeSwitcher.js';
+import ThemeSwitcher from './form/theme/themeSwitcher.js';
 
 class Body extends React.Component {
 
@@ -42,7 +42,7 @@ class Body extends React.Component {
                                     }} onSubmit={this.submit.bind(this)} theme={this.props.theme} />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="#themes">
-                                    <ThemeSwitcher />
+                                    <ThemeSwitcher theme={this.props.theme} />
                                 </Tab.Pane>
                             </Tab.Content>
                         </Col>
