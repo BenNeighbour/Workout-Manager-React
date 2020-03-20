@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./page.css";
+import "./body/body.css";
 import Navigation from "../home/nav/nav.js";
 import Body from "./body/body.js";
 import { Card } from "react-bootstrap";
@@ -21,7 +21,7 @@ export default class WorkoutsPage extends Component {
 
           <div className="card-container">
             <Body theme={this.props.theme} variant={this.props.variant} />
-              <Card className="workoutCard">
+              <Card className="workoutCard" id="add-card">
               <Card.Body className="add-card">
                 <Button onClick={this.redirect.bind(this, "/workouts/add/")} className="add-card-btn">
                   <AddBoxOutlinedIcon style={{ color: `var(--${this.props.theme})` }} />
