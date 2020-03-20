@@ -77,11 +77,6 @@ class Routes extends React.Component {
         break;
       }
       case (7): {
-        variant = "light"
-        theme = "light"
-        break;
-      }
-      case (8): {
         theme = "dark"
         break;
       }

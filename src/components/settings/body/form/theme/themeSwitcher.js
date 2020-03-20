@@ -42,10 +42,6 @@ class ThemeSwitcher extends Component {
 
                     <br />
                     <label className="form-check-label"><Field className="form-check-input" component="input" type="radio" name="option1" value="7" />
-                    Light</label>
-
-                    <br />
-                    <label className="form-check-label"><Field className="form-check-input" component="input" type="radio" name="option1" value="8" />
                     Dark</label>
 
                 </div>
@@ -55,6 +51,7 @@ class ThemeSwitcher extends Component {
                     store.dispatch({ type: "USER_LOGOUT" })
                     this.props.history.push("/login/")
                 }}>Change</Button>
+                
             </form>
         );
     }

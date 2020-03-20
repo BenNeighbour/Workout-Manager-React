@@ -1,4 +1,6 @@
-# Workout Manager
+<p align="center">
+  <img src="/other/logo.png"  />
+</p>
 
 ## Available Scripts
 

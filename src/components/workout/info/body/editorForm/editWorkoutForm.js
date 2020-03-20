@@ -80,7 +80,7 @@ let EditForm = props => {
                         type="number" name="addCalsBurnt" component={renderField}
                         label="Calories Burnt" />
 
-                    <button variant="outline-primary" type="button" className="btn btn-outline-primary" onClick={() => {
+                    <button variant={`outline-${props.theme}`} type="button" className="btn btn-outline-primary" onClick={() => {
                         props.exerciseList.push({
                             name: props.addFormValues.addName,
                             reps: props.addFormValues.addReps,

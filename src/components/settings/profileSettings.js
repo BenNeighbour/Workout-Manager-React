@@ -14,7 +14,7 @@ class ProfileSettingsPage extends React.Component {
                 </div>
             );
         } 
-        return <Loading message="You got me." />
+        return <Loading message="Loading..." />
         
     }
 }
