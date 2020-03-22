@@ -1,4 +1,3 @@
-import { store } from "./../store.js";
 
 const initalstate = {
     submitted: false,

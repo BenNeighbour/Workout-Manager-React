@@ -4,8 +4,6 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { store } from "../../../redux/store.js";
 import Content from "./content/todoList/content.js";
-import Loading from "./../../loading/loading.js";
-import axios from "axios";
 
 class Body extends Component { 
   constructor(props) { 

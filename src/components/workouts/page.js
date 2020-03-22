@@ -17,7 +17,7 @@ export default class WorkoutsPage extends Component {
       return (
         <div className="App">
           <Navigation theme={this.props.theme} variant={this.props.variant} />
-          <h1 id="header" style={{ color: `var(--${this.props.theme})` }}>Your Workouts</h1>
+          <h1 id="header" style={{ color: `var(--${this.props.theme})`, marginLeft: "3vh", marginTop: "1.3vh" }}>Your Workouts</h1>
 
           <div className="card-container">
             <Body theme={this.props.theme} variant={this.props.variant} />
