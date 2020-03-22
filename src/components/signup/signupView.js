@@ -28,6 +28,10 @@ class Signup extends Component {
         store.dispatch({ type: "UNMOUNT_EMAIL_MESSAGE"});
     }
 
+    componentDidMount() { 
+        store.dispatch({ type: "USER_LOGOUT" })
+    }
+
     render() {
         return ( 
             <div className="container">

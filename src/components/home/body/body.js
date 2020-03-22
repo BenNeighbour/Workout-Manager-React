@@ -3,6 +3,9 @@ import "./body.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { store } from "../../../redux/store.js";
+import Content from "./content/todoList/content.js";
+import Loading from "./../../loading/loading.js";
+import axios from "axios";
 
 class Body extends Component { 
   constructor(props) { 
@@ -35,7 +38,8 @@ class Body extends Component {
 
     return (
       <div className="App">
-        <h1 className="welcome" style={{color: `var(--${this.props.theme})`}}>Good {timeOfDay}, {this.props.currentUser}</h1>
+        <h1 className="welcome" style={{ color: `var(--${this.props.theme})` }}>Good {timeOfDay}, {this.props.currentUser}</h1>
+        <Content theme={this.props.theme} variant={this.props.variant} />
       </div>
     );
   }
@@ -49,8 +53,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    
-  }
+
+  };
 };
 
 
