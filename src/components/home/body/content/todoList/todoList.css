@@ -55,10 +55,10 @@
 .todo-container .checkmark:after {
   left: 9px;
   top: 3px;
-  width: 7px;
+  width: 5.5px;
   height: 14.5px;
   border: solid var(--custom);
-  border-width: 0 3px 3px 0;
+  border-width: 0 1.7px 1.7px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);

@@ -1,0 +1,66 @@
+#option-container {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 0px;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#option-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+#option-container p {
+    padding-left: 0px;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(247, 247, 247);
+}
+
+#option-container:hover input ~ .checkmark {
+    background-color: rgb(247, 247, 247);
+}
+
+#option-container input:checked ~ .checkmark {
+    background-color: rgb(247, 247, 247);
+    padding: 1px;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+#option-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+#option-container .checkmark:after {
+    left: 9px;
+    top: 3px;
+    width: 5.5px;
+    height: 14.5px;
+    border: solid var(--custom);
+    border-width: 0 1.7px 1.7px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

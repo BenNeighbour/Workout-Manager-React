@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, getFormValues } from "redux-form";
+import "./checkbox.css";
 
 class ThemeSwitcher extends Component {
     constructor(props) {
@@ -16,33 +17,49 @@ class ThemeSwitcher extends Component {
     render() {
         return (
             <form className="App">
+                <h1 className="welcome" style={{ fontSize: "225%", marginTop: "0px", paddingTop: "0px", marginLeft: "0", color: `var(--${this.props.theme})` }}>Your Theme</h1>
+
                 <div className="form-check form-check">
-                    <label className="form-check-label"><Field className="form-check-input" component="input" type="radio" name="option1" value="1" />
-                    Blue</label>
+                    <label className="form-check-label" id="option-container"><Field className="form-check-input" component="input" type="radio" name="option1" value="1" />
+                        Blue
+                    <span className="checkmark"></span>
+                    </label>
 
                     <br />
-                    <label className="form-check-label"><Field className="form-check-input" component="input" type="radio" name="option1" value="2" />
-                    Grey</label>
+                    <label className="form-check-label" id="option-container"><Field className="form-check-input" component="input" type="radio" name="option1" value="2" />
+                        Grey
+                    <span className="checkmark"></span>
+                    </label>
 
                     <br />
-                    <label className="form-check-label"><Field className="form-check-input" component="input" type="radio" name="option1" value="3" />
-                    Red</label>
+                    <label className="form-check-label" id="option-container"><Field className="form-check-input" component="input" type="radio" name="option1" value="3" />
+                        Red
+                    <span className="checkmark"></span>
+                    </label>
 
                     <br />
-                    <label className="form-check-label"><Field className="form-check-input" component="input" type="radio" name="option1" value="4" />
-                    Green</label>
+                    <label className="form-check-label" id="option-container"><Field className="form-check-input" component="input" type="radio" name="option1" value="4" />
+                        Green
+                    <span className="checkmark"></span>
+                    </label>
 
                     <br />
-                    <label className="form-check-label"><Field className="form-check-input" component="input" type="radio" name="option1" value="5" />
-                    Yellow</label>
+                    <label className="form-check-label" id="option-container"><Field className="form-check-input" component="input" type="radio" name="option1" value="5" />
+                        Yellow
+                    <span className="checkmark"></span>
+                    </label>
 
                     <br />
-                    <label className="form-check-label"><Field className="form-check-input" component="input" type="radio" name="option1" value="6" />
-                    Cyan</label>
+                    <label className="form-check-label" id="option-container"><Field className="form-check-input" component="input" type="radio" name="option1" value="6" />
+                        Cyan
+                    <span className="checkmark"></span>
+                    </label>
 
                     <br />
-                    <label className="form-check-label"><Field className="form-check-input" component="input" type="radio" name="option1" value="7" />
-                    Dark</label>
+                    <label className="form-check-label" id="option-container"><Field className="form-check-input" component="input" type="radio" name="option1" value="7" />
+                        Dark
+                    <span className="checkmark"></span>
+                    </label>
 
                 </div>
 
@@ -50,7 +67,7 @@ class ThemeSwitcher extends Component {
                     await this.props.changeTheme("http://localhost:8080/api/v1/user/settings/theme/" + store.getState().user.uid + "/" + store.getState().user.user + "/" + this.props.option.option1)
                     store.dispatch({ type: "USER_LOGOUT" })
                     this.props.history.push("/login/")
-                }}>Change</Button>
+                }} style={{margin: "4vh"}}>Change</Button>
                 
             </form>
         );
