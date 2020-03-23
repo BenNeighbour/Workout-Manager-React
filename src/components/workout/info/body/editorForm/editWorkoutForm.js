@@ -1,7 +1,7 @@
-import React, {  } from 'react';
+import React, { useState } from 'react';
 import { reduxForm, Field } from "redux-form";
 import { Button, Tab, Tabs } from "react-bootstrap";
-import { getFormValues } from "redux-form";
+import { getFormValues, change } from "redux-form";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { store } from "./../../../../../redux/store.js";
@@ -9,10 +9,11 @@ import axios from "axios";
 import "./editForm.css";
 
 let EditForm = props => {
-    const { handleSubmit } = props;
+    const { handleSubmit, change } = props;
     document.documentElement.style.setProperty("--custom", `var(--${props.theme})`);
 
-    return ( 
+
+    return (
         <form onSubmit={handleSubmit} className="editForm">
             <h1 id="header" style={{color: `var(--${props.theme})`}}>Edit</h1>
             <b className="name" style={{color: `var(--${props.theme})`}}>Name:</b>
@@ -80,7 +81,7 @@ let EditForm = props => {
                         type="number" name="addCalsBurnt" component={renderField}
                         label="Calories Burnt" />
 
-                    <Button variant={`outline-${props.theme}`} type="button" onClick={() => {
+                    <Button variant={`outline-${props.theme}`} type="button" onClick={async () => {
                         props.exerciseList.push({
                             name: props.addFormValues.addName,
                             reps: props.addFormValues.addReps,
@@ -89,9 +90,17 @@ let EditForm = props => {
                             burntCals: props.addFormValues.addCalsBurnt
                         })
 
-                        submitNewExercise(props.exerciseList, props.addExercise)
+                        await submitNewExercise(props.exerciseList, props.addExercise)
+
+                        // Get the current/initial values
+                        let name = store.getState().form.EditForm.values.name
+                        let description = store.getState().form.EditForm.values.description
 
                         props.reset()
+
+                        // Change the form values 
+                        change("name", name)
+                        change("description", description)
 
                         return props.exerciseList;
 

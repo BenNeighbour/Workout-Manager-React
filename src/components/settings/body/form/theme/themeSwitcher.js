@@ -93,7 +93,8 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 ThemeSwitcher = reduxForm({
-    form: 'ThemeSwitcherForm'
+    form: 'ThemeSwitcherForm',
+    enableReinitialize: true
 })(ThemeSwitcher)
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ThemeSwitcher));
