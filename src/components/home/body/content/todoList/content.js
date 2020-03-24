@@ -8,10 +8,10 @@ import { store } from '../../../../../redux/store';
 class Content extends Component { 
     render() {
         return (
-            <div style={{marginLeft: "3.5vw"}}>
+            <div style={{marginLeft: "3.5vw", display: "inline-block"}}>
                 {
                     store.getState().todo.todoList.map((todo, index) => (
-                        <TodoList key={`${todo}-${index}`} text={todo.description} theme={this.props.theme} variant={this.props.variant} />
+                        <TodoList key={`${todo}-${index}`} workout={todo.workout} style={{display: "inline-block" , whiteSpace: "nowrap"}} theme={this.props.theme} variant={this.props.variant} />
                     ))
                 }
             </div>

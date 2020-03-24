@@ -1,4 +1,6 @@
 .todo-container {
+  white-space: nowrap;
+  line-height: "0";
   overflow: hidden;
   position: relative;
   padding-left: 28px;
@@ -10,6 +12,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  line-height: 1.3;
 }
 
 .todo-container * {
@@ -27,6 +30,7 @@
 
 .todo-container p {
   padding-left: 0px;
+  margin-bottom: 0;
 }
 
 .checkmark {

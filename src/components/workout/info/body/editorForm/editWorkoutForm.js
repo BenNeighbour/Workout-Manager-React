@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {  } from 'react';
 import { reduxForm, Field } from "redux-form";
 import { Button, Tab, Tabs } from "react-bootstrap";
-import { getFormValues, change } from "redux-form";
+import { getFormValues } from "redux-form";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { store } from "./../../../../../redux/store.js";

@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { withRouter } from "react-router-dom";
-import { Overlay, Popover } from "react-bootstrap";
+import Info from "@material-ui/icons/Info"
+import { Overlay, Popover, Button } from "react-bootstrap";
 
-const TodoItemPopover = props => {
+const TodoItemPopover = (props) => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
@@ -12,13 +13,10 @@ const TodoItemPopover = props => {
     setTarget(event.target);
   };
 
-  useEffect(() => {
-    console.log("gh")
-    handleClick()
-  })
-
   return (
-    <div ref={ref}>
+    <div style={{ display: "inline-block", marginLeft: "0.5vw" }}>
+      <Button style={{ width: "fit-content", backgroundColor: "white", border: "none", padding: "0" }} onClick={handleClick}><Info style={{ color: "var(--custom)" }} /></Button>
+
       <Overlay
         show={show}
         target={target}
@@ -27,10 +25,13 @@ const TodoItemPopover = props => {
         containerPadding={20}
       >
         <Popover id="popover-contained">
-          <Popover.Title as="h3">Popover bottom</Popover.Title>
+          <Popover.Title as="h3">{props.title.name}</Popover.Title>
           <Popover.Content>
-            <strong>Holy guacamole!</strong> Check this info.
-      </Popover.Content>
+            <b>Description:</b> {props.title.description}
+            <br /><br />
+
+            <Button>Go to workout</Button>
+          </Popover.Content>
         </Popover>
       </Overlay>
     </div>
