@@ -7,6 +7,7 @@ import { getFormValues } from "redux-form";
 import EditForm from "./editorForm/editWorkoutForm";
 import axios from "axios";
 import "./body.css";
+import Loading from "./../../../loading/loading.js";
 
 class Body extends React.Component {
     constructor(props) { 
@@ -36,6 +37,10 @@ class Body extends React.Component {
         await this.props.submitExistingSavedWorkoutExercise();
     }
 
+    componentDidMount() { 
+        this.props.userWorkoutsGet("http://localhost:8080/api/v1/user/username/by/" + store.getState().user.user + "/?access_token=" + store.getState().user.accessToken);
+    }
+
     onItemClick(e) { 
         e.preventDefault();
     }
@@ -57,30 +62,34 @@ class Body extends React.Component {
         }
 
         if (this.state.isEditing === false) {
-            return (
-                <div className="body">
-                    <h1 id="header" style={{color: `var(--${this.props.theme})`}}>{this.props.selectedWorkout.name}</h1>
+            if (store.getState().workout.allWorkouts.length > 0) {
+                return (
+                    <div className="body">
+                        <h1 id="header" style={{ color: `var(--${this.props.theme})` }}>{this.props.selectedWorkout.name}</h1>
 
-                    <p className="name" style={{color: `var(--${this.props.theme})`}}><b>Name:</b> {this.props.selectedWorkout.name}</p>
-                    <p className="name" style={{color: `var(--${this.props.theme})`}}><b>Description:</b> {this.props.selectedWorkout.description}</p>
-                    <p className="name" style={{color: `var(--${this.props.theme})`}}><b>Duration:</b> {this.props.selectedWorkout.duration}</p>
+                        <p className="name" style={{ color: `var(--${this.props.theme})` }}><b>Name:</b> {this.props.selectedWorkout.name}</p>
+                        <p className="name" style={{ color: `var(--${this.props.theme})` }}><b>Description:</b> {this.props.selectedWorkout.description}</p>
+                        <p className="name" style={{ color: `var(--${this.props.theme})` }}><b>Duration:</b> {this.props.selectedWorkout.duration}</p>
 
-                    <Tabs defaultActiveKey={0} style={{margin: "22.5px"}}>
-                        {
-                            this.props.selectedWorkout.exerciseList.map((exercise, index) => (
-                                <Tab eventKey={`${exercise.name} ${index} ${exercise.eid}`} key={index} id="header" title={exercise.name}>
-                                    <p style={{fontSize: "125%", paddingLeft: "6px", color: `var(--${this.props.theme})`}} className="name" key={`${exercise.name} reps ${index}`}><b>Reps:</b> {exercise.reps}</p>
-                                    <p style={{fontSize: "125%", paddingLeft: "6px", color: `var(--${this.props.theme})`}} className="name" key={`${exercise.name} sets ${index}`}><b>Sets:</b> {exercise.sets}</p>
-                                    <p style={{fontSize: "125%", paddingLeft: "6px", color: `var(--${this.props.theme})`}} className="name" key={`${exercise.name} duration ${index}`}><b>Duration:</b> {exercise.duration} minutes</p>
-                                    <p style={{fontSize: "125%", paddingLeft: "6px", color: `var(--${this.props.theme})`}} className="name" key={`${exercise.name} calsBurnt ${index}`}><b>Calories Burnt:</b> {exercise.burntCals}</p>
-                                </Tab>
-                            ))
-                        }
-                    </Tabs>
+                        <Tabs defaultActiveKey={0} style={{ margin: "22.5px" }}>
+                            {
+                                this.props.selectedWorkout.exerciseList.map((exercise, index) => (
+                                    <Tab eventKey={`${exercise.name} ${index} ${exercise.eid}`} key={index} id="header" title={exercise.name}>
+                                        <p style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${this.props.theme})` }} className="name" key={`${exercise.name} reps ${index}`}><b>Reps:</b> {exercise.reps}</p>
+                                        <p style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${this.props.theme})` }} className="name" key={`${exercise.name} sets ${index}`}><b>Sets:</b> {exercise.sets}</p>
+                                        <p style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${this.props.theme})` }} className="name" key={`${exercise.name} duration ${index}`}><b>Duration:</b> {exercise.duration} minutes</p>
+                                        <p style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${this.props.theme})` }} className="name" key={`${exercise.name} calsBurnt ${index}`}><b>Calories Burnt:</b> {exercise.burntCals}</p>
+                                    </Tab>
+                                ))
+                            }
+                        </Tabs>
 
-                    <Button variant={`outline-${this.props.theme}`} onClick={this.onClick.bind(this, true)} className="edit-btn">Edit</Button>
-                </div>
-            );
+                        <Button variant={`outline-${this.props.theme}`} onClick={this.onClick.bind(this, true)} className="edit-btn">Edit</Button>
+                    </div>
+                );
+            } else { 
+                return <Loading />
+            }
         }
     }
 }
@@ -116,9 +125,9 @@ const mapDispatchToProps = (dispatch) => {
                 )
         }),
 
-        userWorkoutsGet: async (url) => dispatch({
+        userWorkoutsGet: (url) => dispatch({
             type: "GET_WORKOUT", payload:
-              await axios.get(url)
+              axios.get(url)
         }),
     }
 };

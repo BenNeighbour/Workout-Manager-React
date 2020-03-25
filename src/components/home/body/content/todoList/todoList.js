@@ -8,7 +8,7 @@ class TodoList extends Component {
     document.documentElement.style.setProperty("--custom", `var(--${this.props.theme})`);
 
     return (
-      <div style={{ width: "90vw", height: "fit-content", display: "inline-block", overflow: "hidden", minHeight: "0vh" }}>
+      <div style={{ width: "49vw", height: "fit-content", display: "inline-block", overflow: "hidden", minHeight: "0vh" }}>
         <label className="todo-container">
           <p style={{paddingRight: "10px"}}>{this.props.workout.name}</p>
           <div className="todo">
@@ -16,7 +16,7 @@ class TodoList extends Component {
             <span className="checkmark"></span>
           </div>
         </label>
-        <TodoItemPopover title={this.props.workout} />
+        <TodoItemPopover theme={this.props.theme} title={this.props.workout} />
       </div>
     );
   }

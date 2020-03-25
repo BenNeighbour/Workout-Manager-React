@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { withRouter } from "react-router-dom";
 import Info from "@material-ui/icons/Info"
 import { Overlay, Popover, Button } from "react-bootstrap";
+import { store } from '../../../../../../redux/store';
 
 const TodoItemPopover = (props) => {
   const [show, setShow] = useState(false);
@@ -24,13 +25,15 @@ const TodoItemPopover = (props) => {
         placement="left"
         containerPadding={20}
       >
-        <Popover id="popover-contained">
-          <Popover.Title as="h3">{props.title.name}</Popover.Title>
+        <Popover id="popover-contained" style={{marginLeft: "30px", width: "max-content"}}>
+          <Popover.Title style={{ fontSize: "130%", fontWeight: "15" }}>{props.title.name}</Popover.Title>
           <Popover.Content>
-            <b>Description:</b> {props.title.description}
-            <br /><br />
+            <b>Description:</b><p style={{ fontWeight: "15" }}>{props.title.description}</p>
 
-            <Button>Go to workout</Button>
+            <Button onClick={async () => {
+              await store.dispatch({ type: "POST_CURRENT_WID", payload: props.title.wid })
+              props.history.push("/workout/info")
+            }} variant={`outline-${props.theme}`} size="sm">Go to workout</Button>
           </Popover.Content>
         </Popover>
       </Overlay>

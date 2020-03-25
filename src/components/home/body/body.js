@@ -28,7 +28,7 @@ class Body extends Component {
 
     if (n >= 12) {
       timeOfDay = "Afternoon"
-    } if (n <= 12) {
+    } if (n <= 12) {    
       timeOfDay = "Morning"
     } if (n >= 17) { 
       timeOfDay = "Night"
