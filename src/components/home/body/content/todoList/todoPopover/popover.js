@@ -25,10 +25,10 @@ const TodoItemPopover = (props) => {
         placement="left"
         containerPadding={20}
       >
-        <Popover id="popover-contained" style={{marginLeft: "30px", width: "max-content"}}>
+        <Popover id="popover-contained" style={{marginLeft: "30px", width: "max-content", overflow: "hidden" }}>
           <Popover.Title style={{ fontSize: "130%", fontWeight: "15" }}>{props.title.name}</Popover.Title>
-          <Popover.Content>
-            <b>Description:</b><p style={{ fontWeight: "15" }}>{props.title.description}</p>
+          <Popover.Content style={{ display: "inline-block" }}>
+            <p style={{ fontWeight: "450" }}>Description:<p style={{ fontWeight: "15" }}>{props.title.description}</p></p>
 
             <Button onClick={async () => {
               await store.dispatch({ type: "POST_CURRENT_WID", payload: props.title.wid })
