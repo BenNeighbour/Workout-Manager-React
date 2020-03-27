@@ -16,6 +16,7 @@ const reducer = combineReducers({
 const rootReducer = (state, action) => { 
     if (action.type === "USER_LOGOUT") { 
         state = undefined;
+        window.location.reload()
     }
 
     return reducer(state, action)

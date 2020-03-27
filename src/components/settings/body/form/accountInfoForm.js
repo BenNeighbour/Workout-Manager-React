@@ -17,10 +17,10 @@ let AccountInfoForm = props => {
             <h1 className="welcome" style={{ fontSize: "225%", marginTop: "0px", paddingTop: "0px", marginLeft: "0", color: `var(--${props.theme})` }}>Account Information</h1>
             
             <Field name="updateUsername" label="Username" type="text"
-                component={renderField} />
+                component={renderField} index="1" />
             
             <Field name="updateEmail" label="Email" type="email" theme={props.theme}
-                component={renderField} />
+                component={renderField} index="2" />
             
             <Button variant={`outline-${props.theme}`} style={{ margin: "3.5px" }} onClick={() => { 
                 props.history.push("/changepassword/")
@@ -28,7 +28,7 @@ let AccountInfoForm = props => {
             
             <Field label="Date of Birth"
                 name="updateDOB" type="date"
-                component={renderField} />
+                component={renderField} index="3" />
             
             <br />
             <Button variant={`outline-${props.theme}`} style={{ margin: "3.5px" }}
@@ -46,9 +46,9 @@ let AccountInfoForm = props => {
     );
 }
 
-const renderField = ({ value, hidden, input, theme, label, type, meta: { touched, error, warning } }) => (
+const renderField = ({ value, hidden, input, index, label, type, meta: { touched, error, warning } }) => (
     <div hidden={hidden} className="field">
-        <input hidden={hidden} disabled={hidden} value={value} {...input} style={{marginLeft: "3.5px", margin: "5px", width: "97.3%"}} id="custom-field" className="form-control" placeholder={label} type={type} />
+        <input hidden={hidden} disabled={hidden} value={value} {...input} style={{marginLeft: "3.5px", margin: "5px", width: "97.3%"}} className="form-control" id={`custom-field-${index}`} placeholder={label} type={type} />
 
         <div className="message">
             {touched && ((error && <p style={{ marginBottom: "0px", marginTop: "0px", color: "red"}}>{error}</p>) || (warning && <p>{warning}</p>))}

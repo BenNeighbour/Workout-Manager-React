@@ -33,7 +33,10 @@ class Navigation extends Component {
                 <Nav.Link onClick={this.redirect.bind(this, "/home/")}>Home</Nav.Link>
                 <Nav.Link onClick={this.redirect.bind(this, "/workouts/all/")}>Workouts</Nav.Link>
                 <Nav.Link onClick={this.redirect.bind(this, "/profile/settings/")}>Your Profile</Nav.Link>
-                <Nav.Link onClick={this.logout.bind(this)}>Sign Out</Nav.Link>
+                <Nav.Link onClick={async () => {
+                  await this.props.history.push("/")
+                  await this.logout()
+                }}>Sign Out</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>

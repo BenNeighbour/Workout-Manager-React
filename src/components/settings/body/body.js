@@ -32,8 +32,8 @@ class Body extends React.Component {
             config
         );
 
-        this.props.history.push("/login");
-        store.dispatch({type: "USER_LOGOUT"});
+        await this.props.history.push("/")
+        await store.dispatch({type: "USER_LOGOUT"});
     }
 
     render() {

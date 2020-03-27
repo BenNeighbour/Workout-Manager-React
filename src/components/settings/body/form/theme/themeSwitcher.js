@@ -66,7 +66,6 @@ class ThemeSwitcher extends Component {
                 <Button variant={`outline-${this.props.theme}`} onClick={async () => {
                     await this.props.changeTheme("http://localhost:8080/api/v1/user/settings/theme/" + store.getState().user.uid + "/" + store.getState().user.user + "/" + this.props.option.option1)
                     store.dispatch({ type: "USER_LOGOUT" })
-                    this.props.history.push("/login/")
                 }} style={{margin: "4vh"}}>Change</Button>
                 
             </form>

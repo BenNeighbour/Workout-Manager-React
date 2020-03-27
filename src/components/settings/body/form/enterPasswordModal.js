@@ -17,13 +17,13 @@ let EnterPasswordModal = (props) => {
             <Modal show={show} style={{ height: "fit-content" }} onHide={handleClose}>
                 <Modal.Header style={{ border: "none" }} closeButton></Modal.Header>
                 <Modal.Body style={{ height: "50vh" }}>
-                    <form onSubmit={props.handleSubmit} className="loginForm">
+                    <form onSubmit={props.handleSubmit} style={{transform: "translate(-50%,-56%)"}} className="loginForm">
                         <h1 className="logo">Change Information</h1>
                         <Field
                             type="password" name="verifyPassword" component={renderField}
                             label="Password" placeholder="Password" />
                     
-                        <p className="or">(This will prompt you to sign back in again with the changes)</p>
+                        <p className="or">(This will redirect you to the landing page, please then log in with the changes)</p>
                         
                         <div className="submit-btn">
                             <Button type="submit" variant="outline-primary" className="submit-btn">Change Info</Button>

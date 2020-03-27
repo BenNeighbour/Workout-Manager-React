@@ -36,7 +36,7 @@ class Page extends Component {
         </div>
       );
     } else { 
-      return <Loading message="Logging In..." />
+      return <Loading message="Loading..." />
     }
   }
 }
@@ -53,7 +53,7 @@ const mapDispatchToProps = (dispatch) => {
     getTodos: (uid, username) => dispatch({
       type: "GET_TODOS", payload: 
         axios.get(
-            `http://localhost:8080/api/v1/user/todos/${uid}/${username}/${today}/?access_token=${store.getState().user.accessToken}`
+          `http://localhost:8080/api/v1/user/todos/${uid}/${username}/${today}/?access_token=${store.getState().user.accessToken}`
         )
     })
   }
