@@ -4,12 +4,11 @@ import { Button } from "react-bootstrap";
 import validate from "./validator/validate.js";
 import { withRouter } from 'react-router-dom';
 
-let ChangePasswordForm = props => { 
-    const { handleSubmit } = props;
+let ChangePasswordForm = (props) => { 
     const isEmailSent = false;
 
     return ( 
-        <form onSubmit={handleSubmit} className="loginForm">
+        <form onSubmit={props.handleSubmit} className="loginForm">
             <h1 className="logo">Change Password</h1>
             <Field
                 type="email" name="email" component={renderField}

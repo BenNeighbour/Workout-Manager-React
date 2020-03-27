@@ -1,6 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { ListGroup, Tab, Col, Row } from "react-bootstrap";
+import { getFormValues } from "redux-form";
+import { connect } from "react-redux";
+import axios from "axios";
 import AccountInfoForm from "./form/accountInfoForm.js";
 import { store } from '../../../redux/store.js';
 import ThemeSwitcher from './form/theme/themeSwitcher.js';
@@ -8,6 +11,27 @@ import ThemeSwitcher from './form/theme/themeSwitcher.js';
 class Body extends React.Component {
 
     submit = async values => { 
+
+        // Extracting form values
+        let newUsername = this.props.newCredentials.updateUsername;
+        let newEmail = this.props.newCredentials.updateEmail;
+        let verifiedPassword = this.props.password;
+
+        const config = {
+            headers: {"Authorization": `Bearer ${store.getState().user.accessToken}`}
+        }; 
+
+        // Make axios user alter request
+        await axios.put(
+            `http://localhost:8080/api/v1/user/update/${verifiedPassword.verifyPassword}`,
+            {
+                "uid": store.getState().user.uid,
+                "username": newUsername,
+                "email": newEmail
+            },
+            config
+        );
+
         this.props.history.push("/login");
         store.dispatch({type: "USER_LOGOUT"});
     }
@@ -39,7 +63,9 @@ class Body extends React.Component {
                                     <AccountInfoForm initialValues={{
                                         updateUsername: store.getState().user.user,
                                         updateEmail: store.getState().user.email
-                                    }} onSubmit={this.submit.bind(this)} theme={this.props.theme} />
+                                    }} onSubmit={() => {
+                                        this.submit()
+                                    }} theme={this.props.theme} />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="#themes">
                                     <ThemeSwitcher theme={this.props.theme} />
@@ -54,4 +80,14 @@ class Body extends React.Component {
     }
 }
 
-export default withRouter(Body);
+const mapStateToProps = (state) => {
+    const selector = getFormValues("AccountInfoForm")
+    const passwordSelector = getFormValues("VerifyChangesForm")
+
+    return {
+        newCredentials: selector(state),
+        password: passwordSelector(state)
+    }
+};
+
+export default withRouter(connect(mapStateToProps, null)(Body));

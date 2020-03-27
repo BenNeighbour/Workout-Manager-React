@@ -1,12 +1,15 @@
-import React, {  } from 'react'; 
+import React, { useState } from 'react'; 
 import { reduxForm, Field } from "redux-form";
 import { Button } from 'react-bootstrap';
 import validate from "./validator/validate";
 import { withRouter } from 'react-router-dom';
 import "./customForm.css";
+import EnterPasswordModal from "./enterPasswordModal";
 
 let AccountInfoForm = props => {
     const { handleSubmit } = props;
+    let [show, setShow] = useState(false);
+
     document.documentElement.style.setProperty("--custom", `var(--${props.theme})`);
 
     return (
@@ -29,8 +32,16 @@ let AccountInfoForm = props => {
             
             <br />
             <Button variant={`outline-${props.theme}`} style={{ margin: "3.5px" }}
-                type="submit">Update Information</Button>
-    
+                onClick={() => {
+                    setShow(true)
+                }}>Update Information</Button>
+
+            {                
+                show === true ? <EnterPasswordModal onSubmit={() => {
+                    handleSubmit()
+                }} showing={show} /> : null
+            }
+
         </form>
     );
 }

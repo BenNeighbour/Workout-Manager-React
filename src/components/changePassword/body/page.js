@@ -9,8 +9,8 @@ class ChangePasswordPage extends React.Component {
     render() { 
         return (
             <div className="App">
-                <ChangePasswordForm onSubmit={async () => {
-                    await this.props.credentialsPost.bind(this, "http://localhost:8080/api/v1/user/password/request/change/", this.props.credentials)
+                <ChangePasswordForm onSubmit={() => {
+                    this.props.credentialsPost("http://localhost:8080/api/v1/user/password/request/change/", this.props.credentials)
                 }} />
             </div>
         );
