@@ -4,4 +4,5 @@ body {
 
 .navbar {
     position: sticky;
+    line-height: 2;
 }

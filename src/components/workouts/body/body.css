@@ -1,26 +1,29 @@
-* {
+.card-container {
     box-sizing: border-box;
     overflow-x: hidden;
 }
 
 .card-container {
-    display: inline-flex;
-    margin-left: 1vh;
-    margin-right: 1vh;
-    align-content: center;
+    margin-left: 2vh;
+    margin-right: 2vh;
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
 }
 
 body .workoutCard {
-    display: inline-block;
+    display: block;
 }
 body .workoutCard {
    padding: 1px;
    float: left;
-   width: 29%;
-   margin-left: 1vh;
-   margin-right: 1vh;
+   flex: 2 1 auto;
+   width: 30%;
+   min-height: 45vh;
+   margin-right: 1%;
    margin-top: 7.5px;
    margin-bottom: 7.5px;
+   box-sizing: border-box;
    overflow: hidden;
 }
 
@@ -37,28 +40,22 @@ body .workoutCard ::-webkit-scrollbar {
     width: 100%;
     height: 100%;
     size: 300%;
-    padding-top: 21.3vh;
-    padding-bottom: 21.3vh;
     margin: 0;
 }
 
-.App .workoutCard .add-card {
-    display: block;
-    width: 100%;
+body .card-container #add-card .add-card {
     height: 100%;
-    size: 300%;
     padding: 0;
 }
 
 .App .workoutCard .add-card .add-card-btn .MuiButton-label .MuiSvgIcon-root {
     width: 4.7em;
-    height: 7em;
-    position: static;
+    height: 100%;
     padding: 0;
     position: absolute;
     top: 55%;
     left: 50%;
-    transform: translate(-50%,-63%);
+    transform: translate(-50%,-55%);
 }
 
 body:after {
@@ -68,9 +65,6 @@ body:after {
   
 
 @media screen and (max-width: 600px) {
-    .card-container {
-        display: grid;
-    }
     body .workoutCard {
         display: inline-block;
         width: fit-content;
@@ -81,5 +75,15 @@ body:after {
         display: inline-block;
         width: 90.5vw;
         overflow: hidden;
+    }
+
+    .App .workoutCard .add-card .add-card-btn .MuiButton-label .MuiSvgIcon-root {
+        width: 5em;
+        height: 100%;
+        padding: 0;
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%,-55%);
     }
 }
