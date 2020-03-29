@@ -32,7 +32,7 @@ class Page extends Component {
       return (
         <div className="App">
           <Navigation theme={this.props.theme} variant={this.props.variant} />
-          <Body theme={this.props.theme} variant={this.props.variant} />
+          <Body saveTodos={this.props.saveTodos.bind()} theme={this.props.theme} variant={this.props.variant} />
         </div>
       );
     } else { 
@@ -54,6 +54,13 @@ const mapDispatchToProps = (dispatch) => {
       type: "GET_TODOS", payload: 
         axios.get(
           `http://localhost:8080/api/v1/user/todos/${uid}/${username}/${today}/?access_token=${store.getState().user.accessToken}`
+        )
+    }),
+
+    saveTodos: (uid, username, wid, todo, completed) => dispatch({
+      type: "COMPLETE_TODOS", payload: 
+        axios.post(
+          `http://localhost:8080/api/v1/user/todos/${uid}/${username}/${todo.workout.name}/${completed}/?access_token=${store.getState().user.accessToken}`,
         )
     })
   }

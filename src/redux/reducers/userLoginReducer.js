@@ -117,6 +117,12 @@ export default function reducer(state = initalstate, action) {
             };
         }
             
+        case "USER_LOGOUT": { 
+            return {
+                ...state, isAuthenticated: false
+            };
+        }
+            
         default: { 
             break;
         }
