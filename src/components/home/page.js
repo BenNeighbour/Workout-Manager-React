@@ -49,12 +49,39 @@ const mapDispatchToProps = (dispatch) => {
   let current = new Date();
   let today = current.toLocaleDateString('en-US', { weekday: 'long' });
 
+  const config = {
+    headers: {"Authorization": "Basic NTY0aGpnNDU2dXlkc2dmc2RnZnNkdXl0ZnRyeTM3M3Y1Y2JmZjpNeVN0cm9uZ1Bhc3N3b3Jk", "Content-type": "application/json"}
+  };
+
   return {
+
     getTodos: (uid, username) => dispatch({
       type: "GET_TODOS", payload: 
         axios.get(
           `http://localhost:8080/api/v1/user/todos/${uid}/${username}/${today}/?access_token=${store.getState().user.accessToken}`
         )
+        .then((data) => {
+          return data;
+        })
+        .catch(async (error) => {
+          if (error.response.status === 401) {
+            // Try refresh
+            await store.dispatch({ type: "USER_TOKEN_REFRESH", payload: 
+              axios.post(
+                `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
+                {}, 
+                config
+              ).then(async (response) => {
+                window.location.reload()
+              }).catch(async (error) => {
+                console.log(error)
+                await store.dispatch({ type: "USER_LOGOUT" });
+                await this.props.history.push("/")
+              })
+            })
+
+          }
+        })
     }),
 
     saveTodos: (uid, username, wid, todo, completed) => dispatch({

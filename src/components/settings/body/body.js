@@ -33,8 +33,8 @@ class Body extends React.Component {
         );
 
         await store.dispatch({ type: "USER_LOGOUT" });
-        this.props.history.push("/")
-        window.location.reload()
+        await this.props.history.push("/")
+        await window.location.reload()
     }
 
     render() {

@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { store } from "../../../redux/store.js";
 import Content from "./content/todoList/content.js";
+import axios from "axios";
 
 class Body extends Component { 
   constructor(props) { 
@@ -37,7 +38,7 @@ class Body extends Component {
     return (
       <div className="App">
         <h1 className="welcome" style={{ color: `var(--${this.props.theme})` }}>Good {timeOfDay}, {this.props.currentUser}</h1>
-        <Content saveTodos={this.props.saveTodos} theme={this.props.theme} variant={this.props.variant} />
+        <Content getWorkouts={this.props.userWorkoutsGet.bind(this)} saveTodos={this.props.saveTodos} theme={this.props.theme} variant={this.props.variant} />
       </div>
     );
   }
@@ -51,7 +52,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    userWorkoutsGet: (url) => dispatch({
+      type: "GET_WORKOUT", payload:
+        axios.get(url)
+    }),
   };
 };
 

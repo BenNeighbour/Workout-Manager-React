@@ -20,32 +20,6 @@ import { connect } from "react-redux";
 
 class Routes extends React.Component {
 
-  sessionRefresh = () => {
-    const url = `http://localhost:8080/api/v1/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`
-  
-    setInterval(() =>
-      this.intervalHelper(url),
-      300 * 1000
-    )
-  }
-
-  intervalHelper = async (url) => { 
-    await this.props.userRefresh(url);
-  }
-
-  componentDidMount() { 
-    const error = store.getState().user.error;
-    
-    if (store.getState().user.refreshToken === null || error !== 200) { 
-      if (error === "Invalid refresh token") {
-        store.dispatch({ type: "USER_LOGOUT" })
-      }
-    }
-    if (store.getState().user.isAuthenticated === true) {
-      this.sessionRefresh();
-    }
-  }
-
   render() {
     let theme = null;
     let variant = "dark";

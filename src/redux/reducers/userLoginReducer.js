@@ -76,7 +76,7 @@ export default function reducer(state = initalstate, action) {
         }
         case "USER_TOKEN_REFRESH_REJECTED": { 
             return {
-                ...state, refreshToken: null, accessToken: null, isAuthenticated: false,
+                ...state, refreshToken: null, accessToken: null, 
                 error: action.payload.response.data.error_description
             };
         }

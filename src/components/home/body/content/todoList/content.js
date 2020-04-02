@@ -22,7 +22,8 @@ class Content extends Component {
     componentDidMount() {
         store.getState().todo.todoList.map(async (todo, index) => {
             await this.setChecked(todo.workout.name, todo.completed)
-        })
+        });
+        this.props.getWorkouts("http://localhost:8080/api/v1/user/username/by/" + store.getState().user.user + "/?access_token=" + store.getState().user.accessToken)
     }
 
     render() {
@@ -67,8 +68,8 @@ class Content extends Component {
 
                 {                
                     this.state.show === true ? <AddTodoModal onSubmit={() => {
-                        
-                    }} showing={this.state.show} /> : null
+
+                    }} theme={this.props.theme} selectedVals={this.props.values} showing={this.state.show} /> : null
                 }
 
             </div>
@@ -86,7 +87,8 @@ class Content extends Component {
 }   
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

@@ -22,7 +22,7 @@ let EditForm = props => {
                 id="name" label="Workout Name" />
             
             <b className="description" style={{color: `var(--${props.theme})`}}>Description:</b>
-            <Field type="text" name="description" component={renderField} label="Description" />
+            <Field name="description" component={renderField} label="Description" />
 
             <Tabs defaultActiveKey={0} style={{margin: "22.5px", overflowY: "hidden"}}>
                 {
