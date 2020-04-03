@@ -38,7 +38,7 @@ class Body extends Component {
     return (
       <div className="App">
         <h1 className="welcome" style={{ color: `var(--${this.props.theme})` }}>Good {timeOfDay}, {this.props.currentUser}</h1>
-        <Content getWorkouts={this.props.userWorkoutsGet.bind(this)} saveTodos={this.props.saveTodos} theme={this.props.theme} variant={this.props.variant} />
+        <Content day={this.props.day} getWorkouts={this.props.userWorkoutsGet.bind(this)} saveTodos={this.props.saveTodos} theme={this.props.theme} variant={this.props.variant} />
       </div>
     );
   }
@@ -74,6 +74,7 @@ const mapDispatchToProps = (dispatch) => {
               }).catch(async (error) => { 
                 await store.dispatch({ type: "USER_LOGOUT" });
                 await this.props.history.push("/")
+                window.location.reload()
               })
             })
           }

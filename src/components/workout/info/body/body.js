@@ -140,8 +140,9 @@ const mapDispatchToProps = (dispatch) => {
                           window.location.reload()
                           return data;
                         }).catch(async (error) => { 
-                          await store.dispatch({ type: "USER_LOGOUT" });
-                          await this.props.history.push("/")
+                            await store.dispatch({ type: "USER_LOGOUT" });
+                            await this.props.history.push("/")
+                            window.location.reload()
                         })
                       })
                     }
@@ -164,8 +165,9 @@ const mapDispatchToProps = (dispatch) => {
                       window.location.reload()
                       return data;
                     }).catch(async (error) => { 
-                      await store.dispatch({ type: "USER_LOGOUT" });
-                      await this.props.history.push("/")
+                        await store.dispatch({ type: "USER_LOGOUT" });
+                        await this.props.history.push("/")
+                        window.location.reload()
                     })
                   })
                 }

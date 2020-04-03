@@ -81,6 +81,7 @@ const mapDispatchToProps = (dispatch) => {
               }).catch(async (error) => { 
                 await store.dispatch({ type: "USER_LOGOUT" });
                 await this.props.history.push("/")
+                window.location.reload()
               })
             })
           }

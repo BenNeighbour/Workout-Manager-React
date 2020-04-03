@@ -32,7 +32,7 @@ class Page extends Component {
       return (
         <div className="App">
           <Navigation theme={this.props.theme} variant={this.props.variant} />
-          <Body saveTodos={this.props.saveTodos.bind()} theme={this.props.theme} variant={this.props.variant} />
+          <Body day={this.props.today} saveTodos={this.props.saveTodos.bind()} theme={this.props.theme} variant={this.props.variant} />
         </div>
       );
     } else { 
@@ -42,7 +42,12 @@ class Page extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  let current = new Date();
+  let today = current.toLocaleDateString('en-US', { weekday: 'long' });
+
+  return {
+    day: today
+  }
 };
 
 const mapDispatchToProps = (dispatch) => {

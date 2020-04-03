@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import TodoList from "./todoList.js";
 import { store } from '../../../../../redux/store';
 import { Button } from "react-bootstrap";
-import { reduxForm } from "redux-form";
+import { reduxForm, getFormValues } from "redux-form";
 import AddTodoModal from "./todoPopover/addPopover.js";
+import axios from 'axios';
 
 class Content extends Component {
     constructor(props) { 
@@ -67,8 +68,27 @@ class Content extends Component {
                 }} variant={`outline-${this.props.theme}`}>Save</Button>
 
                 {                
-                    this.state.show === true ? <AddTodoModal onSubmit={() => {
+                    this.state.show === true ? <AddTodoModal onSubmit={async () => {
+                        let workout = ""
+                        // Get the corresponding wid of the workout name
+                        if (this.props.addFormValues.workout != undefined) {
+                            workout = this.props.addFormValues.workout
+                            store.getState().workout.allWorkouts.map((todo) => {
+                                if (todo.name === workout) {
+                                    workout = todo.wid
+                                }
 
+                                return workout
+                            });
+                        }
+
+                        let day = this.props.addFormValues.day
+                        let description = this.props.addFormValues.description
+
+                        await this.props.addTodo(`http://localhost:8080/api/v1/user/todos/${store.getState().user.uid}/${store.getState().user.user}/${day}/save/`,
+                            workout, description)
+                        
+                        window.location.reload()
                     }} theme={this.props.theme} selectedVals={this.props.values} showing={this.state.show} /> : null
                 }
 
@@ -87,12 +107,52 @@ class Content extends Component {
 }   
 
 const mapStateToProps = (state) => {
+    const selector = getFormValues("AddTodoForm")
     return {
+        addFormValues: selector(state)
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {};
+    const config = {
+        headers: {"Authorization": "Basic NTY0aGpnNDU2dXlkc2dmc2RnZnNkdXl0ZnRyeTM3M3Y1Y2JmZjpNeVN0cm9uZ1Bhc3N3b3Jk", "Content-type": "application/json"}
+    };
+
+    return {
+        addTodo: (url, wid, description) => dispatch({ 
+            type: "ADD_TODO", payload:
+                axios.post(
+                    `${url}?access_token=${store.getState().user.accessToken}`,
+                    {
+                        "description": description,
+                        "workout": {
+                            "wid": wid
+                        }
+                    }
+                ).then((data) => {
+                    return data;
+                }).catch(async (error) => {
+                    if (error.response.status === 401) {
+                        // Try refresh
+                        await store.dispatch({ type: "USER_TOKEN_REFRESH", payload: 
+                            axios.post(
+                                `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
+                                {}, 
+                                config
+                            ).then(async (data) => {
+                                window.location.reload()
+                                return data;
+                            }).catch(async (error) => { 
+                                await store.dispatch({ type: "USER_LOGOUT" });
+                                await this.props.history.push("/")
+                            })
+                        })
+                    } else if (error.response.status === 400) {
+                        return error;
+                    }
+                })
+        })
+    };
 };
 
 Content = reduxForm({
