@@ -59,11 +59,9 @@ const mapDispatchToProps = (dispatch) => {
       type: "GET_TODOS", payload: 
         axios.get(
           `http://localhost:8080/api/v1/user/todos/${uid}/${username}/${today}/?access_token=${store.getState().user.accessToken}`
-        )
-        .then((data) => {
+        ).then((data) => {
           return data;
-        })
-        .catch(async (error) => {
+        }).catch(async (error) => {
           if (error.response.status === 401) {
             // Try refresh
             await store.dispatch({ type: "USER_TOKEN_REFRESH", payload: 
@@ -71,15 +69,14 @@ const mapDispatchToProps = (dispatch) => {
                 `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
                 {}, 
                 config
-              ).then(async (response) => {
+              ).then(async (data) => {
                 window.location.reload()
-              }).catch(async (error) => {
-                console.log(error)
+                return data;
+              }).catch(async (error) => { 
                 await store.dispatch({ type: "USER_LOGOUT" });
                 await this.props.history.push("/")
               })
             })
-
           }
         })
     }),
@@ -88,7 +85,25 @@ const mapDispatchToProps = (dispatch) => {
       type: "COMPLETE_TODOS", payload: 
         axios.post(
           `http://localhost:8080/api/v1/user/todos/${uid}/${username}/${todo.workout.name}/${completed}/?access_token=${store.getState().user.accessToken}`,
-        )
+        ).then((data) => {
+          return data;
+        }).catch(async (error) => {
+          if (error.response.status === 401) {
+            // Try refresh
+            await store.dispatch({ type: "USER_TOKEN_REFRESH", payload: 
+              axios.post(
+                `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
+                {}, 
+                config
+              ).then(async (data) => {
+                return data;
+              }).catch(async (error) => { 
+                await store.dispatch({ type: "USER_LOGOUT" });
+                await this.props.history.push("/")
+              })
+            })
+          }
+        })
     })
   }
 };

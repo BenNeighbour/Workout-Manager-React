@@ -29,7 +29,9 @@ class Signup extends Component {
     }
 
     componentDidMount() { 
-        store.dispatch({ type: "USER_LOGOUT" })
+        if (store.getState().user.isAuthenticated === true) {
+            store.dispatch({ type: "USER_LOGOUT" })
+        }
     }
 
     render() {

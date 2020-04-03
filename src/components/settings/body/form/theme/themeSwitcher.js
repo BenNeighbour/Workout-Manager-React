@@ -83,12 +83,35 @@ const mapStateToProps = (state) => {
 };
   
 const mapDispatchToProps = (dispatch) => {
+    const config = {
+        headers: {"Authorization": "Basic NTY0aGpnNDU2dXlkc2dmc2RnZnNkdXl0ZnRyeTM3M3Y1Y2JmZjpNeVN0cm9uZ1Bhc3N3b3Jk", "Content-type": "application/json"}
+    };
+    
     return {
         changeTheme: (url) => dispatch({
             type: "THEME_CHANGE", payload:
                 axios.post(
                     url
-                )
+                ).then((data) => {
+                    return data;
+                    }).catch(async (error) => {
+                    if (error.response.status === 401) {
+                        // Try refresh
+                        await store.dispatch({ type: "USER_TOKEN_REFRESH", payload: 
+                        axios.post(
+                            `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
+                            {}, 
+                            config
+                        ).then(async (data) => {
+                            window.location.reload()
+                            return data;
+                        }).catch(async (error) => { 
+                            await store.dispatch({ type: "USER_LOGOUT" });
+                            await this.props.history.push("/")
+                        })
+                        })
+                    }
+                })
         })
     }
 };

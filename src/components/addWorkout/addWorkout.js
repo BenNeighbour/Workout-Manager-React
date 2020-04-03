@@ -42,23 +42,45 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
+  const config = {
+    headers: {"Authorization": "Basic NTY0aGpnNDU2dXlkc2dmc2RnZnNkdXl0ZnRyeTM3M3Y1Y2JmZjpNeVN0cm9uZ1Bhc3N3b3Jk", "Content-type": "application/json"}
+  };
 
+  return {
     submitWorkout: (name, exerciseList, description, duration) => { 
       store.dispatch({
         type: "WORKOUT", payload:
           axios.post(
           `http://localhost:8080/api/v1/workout/save/?access_token=${store.getState().user.accessToken}`,
-          { 
-            "name": name,
-            "exerciseList": exerciseList,
-            "description": description,
-            "duration": duration,
-            "user": {
-              "uid": store.getState().user.uid
+            { 
+              "name": name,
+              "exerciseList": exerciseList,
+              "description": description,
+              "duration": duration,
+              "user": {
+                "uid": store.getState().user.uid
+              }
             }
-          }
-        )
+          ).then((data) => {
+            return data;
+          }).catch(async (error) => {
+            if (error.response.status === 401) {
+              // Try refresh
+              await store.dispatch({ type: "USER_TOKEN_REFRESH", payload: 
+                axios.post(
+                  `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
+                  {}, 
+                  config
+                ).then(async (data) => {
+                  window.location.reload()
+                  return data;
+                }).catch(async (error) => { 
+                  await store.dispatch({ type: "USER_LOGOUT" });
+                  await this.props.history.push("/")
+                })
+              })
+            }
+          })
       })
     },
 
