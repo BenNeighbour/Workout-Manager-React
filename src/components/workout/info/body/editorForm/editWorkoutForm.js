@@ -22,12 +22,17 @@ let EditForm = props => {
                 id="name" label="Workout Name" />
             
             <b className="description" style={{color: `var(--${props.theme})`}}>Description:</b>
-            <Field name="description" component={renderField} label="Description" />
+            <Field type="text" name="description" id="custom-field" className="form-control" style={{ height: "130px", maxHeight: "130px", minHeight: "130px" }} component="textarea" label="Description" />
 
             <Tabs defaultActiveKey={0} style={{margin: "22.5px", overflowY: "hidden"}}>
                 {
                     props.exerciseList.map((exercise, index) => (
                         <Tab eventKey={`${exercise.name} ${index} ${exercise.eid}`} key={index} id="header" title={exercise.name}>
+
+                            <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name" key={`${exercise.name} name ${index}`}>Name:</b>
+                            <Field
+                                type="text" name={`exercises[${index}].name`} component={renderField}
+                                label="Name" />
 
                             <b style={{ fontSize: "125%", paddingLeft: "6px", color: `var(--${props.theme})`}} className="name" key={`${exercise.name} reps ${index}`}>Reps:</b>
                             <Field
@@ -48,6 +53,23 @@ let EditForm = props => {
                             <Field
                                 type="number" name={`exercises[${index}].burntCals`} component={renderField}
                                 label="Calories Burnt" />
+
+
+                            <Button variant={`outline-${props.theme}`} type="button" onClick={async () => {
+                                let changedExercise = {
+                                    eid: props.exerciseList[index].eid,
+                                    name: props.addFormValues.exercises[index].name,
+                                    duration: props.addFormValues.exercises[index].duration,
+                                    reps: props.addFormValues.exercises[index].reps,
+                                    sets: props.addFormValues.exercises[index].sets,
+                                    burntCals: props.addFormValues.exercises[index].burntCals
+                                }
+
+                                // Change values to the new selected ones
+                                props.exerciseList[index] = changedExercise;
+
+                                await changeExisting(props.exerciseList[index], props.addExercise);
+                            }}>Save</Button>
 
                         </Tab>
                     ))
@@ -121,6 +143,10 @@ let submitNewExercise = (exercises, helper) => {
         helper(exercise.eid, exercise.name, exercise.reps, exercise.sets, exercise.duration, exercise.burntCals);
         return exercise;
     });
+}
+
+let changeExisting = (exercise, helper) => {
+    helper(exercise.eid, exercise.name, exercise.reps, exercise.sets, exercise.duration, exercise.burntCals);
 }
 
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (

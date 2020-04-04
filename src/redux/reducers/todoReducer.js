@@ -39,6 +39,22 @@ export default function reducer(state = initalstate, action) {
                 ...state, submitted: true, granted: true
             }
         }
+
+        case "DELETE_TODO_PENDING": {
+            return {
+                ...state, submitted: true, granted: true
+            }
+        }
+        case "DELETE_TODO_REJECTED": {
+            return {
+                ...state, submitted: true, granted: false, error: action.payload.data.status
+            }
+        }
+        case "DELETE_TODO_FULFILLED": {
+            return {
+                ...state, submitted: true, granted: true
+            }
+        }
             
         default: { 
             break;

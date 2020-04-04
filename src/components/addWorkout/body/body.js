@@ -21,7 +21,7 @@ let AddWorkoutForm = props => {
     return ( 
         <form onSubmit={handleSubmit} className="AddWorkoutForm">
             <h1 className="name" style={{color: `var(--${props.theme})`}}>Name:</h1><Field type="text" name="name" component="input" placeholder="Workout Name" className="form-control" id="custom-field" />
-            <h1 className="description" style={{color: `var(--${props.theme})`}}>Description:</h1><Field type="text" name="description" component="input" placeholder="Description" className="form-control" id="custom-field" />
+            <h1 className="description" style={{color: `var(--${props.theme})`}}>Description:</h1><Field style={{ height: "130px", maxHeight: "130px", minHeight: "130px" }} component="textarea" type="text" name="description" placeholder="Description" className="form-control" id="custom-field" />
             <Button variant={`outline-${props.theme}`} type="submit">Save</Button>
         </form>
     );

@@ -38,8 +38,6 @@ const TodoItemPopover = (props) => {
             
             <div style={{ paddingTop: "10px" }}>
               <Button onClick={async () => {
-                // await store.dispatch({ type: "REMOVE_TODO", payload: props.iid })
-
                 await store.dispatch({
                   type: "REMOVE_TODO", payload: 
                     axios.delete(
