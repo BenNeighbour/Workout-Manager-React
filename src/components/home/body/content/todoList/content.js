@@ -37,7 +37,7 @@ class Content extends Component {
                 <div style={{paddingLeft: "1.3vw"}}>
                     {
                         store.getState().todo.todoList.map((todo, index) => (
-                            <TodoList key={`${todo}-${index}`} workout={todo.workout} style={{display: "inline-block" , whiteSpace: "nowrap"}} theme={this.props.theme} variant={this.props.variant} />
+                            <TodoList key={`${todo}-${index}`} workout={todo.workout} todo={todo} style={{display: "inline-block" , whiteSpace: "nowrap"}} theme={this.props.theme} variant={this.props.variant} />
                         ))
                     }
                 </div>
@@ -71,7 +71,7 @@ class Content extends Component {
                     this.state.show === true ? <AddTodoModal onSubmit={async () => {
                         let workout = ""
                         // Get the corresponding wid of the workout name
-                        if (this.props.addFormValues.workout != undefined) {
+                        if (this.props.addFormValues.workout !== undefined) {
                             workout = this.props.addFormValues.workout
                             store.getState().workout.allWorkouts.map((todo) => {
                                 if (todo.name === workout) {
@@ -88,7 +88,9 @@ class Content extends Component {
                         await this.props.addTodo(`http://localhost:8080/api/v1/user/todos/${store.getState().user.uid}/${store.getState().user.user}/${day}/save/`,
                             workout, description)
                         
-                        window.location.reload()
+                        if (store.getState().todo.error === 200) {
+                            window.location.reload()
+                        }
                     }} theme={this.props.theme} selectedVals={this.props.values} showing={this.state.show} /> : null
                 }
 

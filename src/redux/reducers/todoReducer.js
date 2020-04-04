@@ -24,17 +24,17 @@ export default function reducer(state = initalstate, action) {
             }
         }
             
-        case "ADD_TODOS_PENDING": {
+        case "ADD_TODO_PENDING": {
             return {
                 ...state, submitted: true
             }
         }
-        case "ADD_TODOS_REJECTED": {
+        case "ADD_TODO_REJECTED": {
             return {
-                ...state, submitted: true, granted: false, error: action.payload.error.status
+                ...state, submitted: true, granted: false, error: action.payload.data.status
             }
         }
-        case "ADD_TODOS_FULFILLED": {
+        case "ADD_TODO_FULFILLED": {
             return {
                 ...state, submitted: true, granted: true
             }

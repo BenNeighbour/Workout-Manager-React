@@ -16,7 +16,7 @@ class TodoList extends Component {
             <span className="checkmark"></span>
           </div>
         </label>
-        <TodoItemPopover theme={this.props.theme} title={this.props.workout} />
+        <TodoItemPopover theme={this.props.theme} title={this.props.workout} todo={this.props.todo} iid={this.props.todo.iid} />
       </div>
     );
   }

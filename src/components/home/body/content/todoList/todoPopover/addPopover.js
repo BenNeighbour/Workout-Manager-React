@@ -47,7 +47,7 @@ let AddTodoModal = (props) => {
                         <label style={{ width: "80%", marginBottom: "2vh", paddingBottom: "2vh", lineHeight: "2.5vh" }}><Field id="custom-field-description" style={{ height: "130px", maxHeight: "130px", minHeight: "130px" }} placeholder="Todo Description" component="textarea" name="description" className="form-control" /></label>
 
                         {
-                            store.getState().todo.error !== 200 ? <p style={{ color: "red", fontWeight: "90%", marginBottom: "12px", marginTop: "0px"}}></p> : undefined
+                            store.getState().todo.error !== 200 ? <p style={{ color: "red", fontWeight: "90%", marginBottom: "12px", marginTop: "0px"}}>Error {store.getState().todo.error}</p> : undefined
                         }
 
                         <div style={{ height: "auto" }} className="submit-btn">
