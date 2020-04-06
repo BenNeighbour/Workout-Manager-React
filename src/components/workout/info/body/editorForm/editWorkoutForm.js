@@ -1,4 +1,4 @@
-import React, {  } from 'react';
+import React, { useCallback } from 'react';
 import { reduxForm, Field } from "redux-form";
 import { Button, Tab, Tabs } from "react-bootstrap";
 import { getFormValues } from "redux-form";
@@ -12,6 +12,8 @@ let EditForm = props => {
     const { handleSubmit, change } = props;
     document.documentElement.style.setProperty("--custom", `var(--${props.theme})`);
 
+    const [, updateState] = React.useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
 
     return (
         <form onSubmit={handleSubmit} className="editForm">
@@ -69,6 +71,9 @@ let EditForm = props => {
                                 props.exerciseList[index] = changedExercise;
 
                                 await changeExisting(props.exerciseList[index], props.addExercise);
+
+                                // Forcing component to re-render when changes are made
+                                forceUpdate()
                             }}>Save</Button>
 
                         </Tab>

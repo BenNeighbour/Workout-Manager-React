@@ -46,6 +46,11 @@ export default function reducer(state = initalstate, action) {
         case "POST_CURRENT_WID": { 
             return { ...state, currentWid: action.payload }; 
         }
+            
+        case "DELETE_CURRENT_WID": { 
+            return { ...state, currentWid: null }; 
+        }
+            
         default: { 
             break;
         }

@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Button, Tab, Tabs } from "react-bootstrap";
 import { getFormValues } from "redux-form";
 import EditForm from "./editorForm/editWorkoutForm";
+import ConfirmDeleteModal from "./modal/deleteModal.js";
 import axios from "axios";
 import "./body.css";
 import Loading from "./../../../loading/loading.js";
@@ -14,7 +15,8 @@ class Body extends React.Component {
         super(props);
         
         this.state = {
-            isEditing: false
+            isEditing: false,
+            show: false
         }
     }
     
@@ -85,6 +87,21 @@ class Body extends React.Component {
                         </Tabs>
 
                         <Button variant={`outline-${this.props.theme}`} onClick={this.onClick.bind(this, true)} className="edit-btn">Edit</Button>
+                        <Button variant="outline-danger" className="edit-btn" style={{ marginTop: "10px" }} onClick={() => {
+                            this.setState({show: true})    
+                        }}>Delete Workout</Button>
+
+                        {
+                            this.state.show === true ? <ConfirmDeleteModal theme={this.props.theme} selectedVals={this.props.values}
+                                showing={this.state.show} onSubmit={async () => { 
+                                    // Delete workout
+                                    await this.props.deleteWorkout(`http://localhost:8080/api/v1/workout/delete/by/${store.getState().workout.currentWid}/?access_token=${store.getState().user.accessToken}`);
+                                    await this.props.history.push("/workouts/all/")
+                                    await store.dispatch({ type: "DELETE_CURRENT_WID" })
+                                    
+                                    await window.location.reload()
+                                }} /> : null
+                        }
                     </div>
                 );
             } else { 
@@ -143,6 +160,7 @@ const mapDispatchToProps = (dispatch) => {
                             await store.dispatch({ type: "USER_LOGOUT" });
                             await this.props.history.push("/")
                             window.location.reload()
+                            return error;
                         })
                       })
                     }
@@ -151,28 +169,53 @@ const mapDispatchToProps = (dispatch) => {
 
         userWorkoutsGet: (url) => dispatch({
             type: "GET_WORKOUT", payload:
-              axios.get(url).then((data) => {
-                return data;
-              }).catch(async (error) => {
-                if (error.response.status === 401) {
-                  // Try refresh
-                  await store.dispatch({ type: "USER_TOKEN_REFRESH", payload: 
-                    axios.post(
-                      `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
-                      {}, 
-                      config
-                    ).then(async (data) => {
-                      window.location.reload()
-                      return data;
-                    }).catch(async (error) => { 
-                        await store.dispatch({ type: "USER_LOGOUT" });
-                        await this.props.history.push("/")
-                        window.location.reload()
-                    })
-                  })
-                }
+                axios.get(url).then((data) => {
+                    return data;
+                }).catch(async (error) => {
+                    if (error.response.status === 401) {
+                        // Try refresh
+                        await store.dispatch({ type: "USER_TOKEN_REFRESH", payload: 
+                            axios.post(
+                            `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
+                            {}, 
+                            config
+                            ).then(async (data) => {
+                            return data;
+                            }).catch(async (error) => { 
+                                await store.dispatch({ type: "USER_LOGOUT" });
+                                await this.props.history.push("/")
+                                window.location.reload()
+                                Promise.reject()
+                            })
+                        })
+                    }
               })
         }),
+
+        deleteWorkout: (url) => dispatch({
+            type: "REMOVE_WORKOUT", payload:
+                axios.delete(url).then((data) => {
+                    return data;
+                }).catch(async (error) => {
+                    if (error.response.status === 401) {
+                        // Try refresh
+                        await store.dispatch({ type: "USER_TOKEN_REFRESH", payload: 
+                            axios.post(
+                            `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
+                            {}, 
+                            config
+                            ).then(async (data) => {
+                            return data;
+                            }).catch(async (error) => { 
+                                await store.dispatch({ type: "USER_LOGOUT" });
+                                await this.props.history.push("/")
+                                window.location.reload()
+                                Promise.reject()
+                            })
+                        })
+                    }
+              })
+        })
     }
 };
 
