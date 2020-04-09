@@ -9,15 +9,19 @@ import Loading from '../../loading/loading.js';
 
 class WorkoutPage extends Component { 
     render() {
-        if (this.props.theme !== null) {
-            return (
-                <div>
-                    <Navigation theme={this.props.theme} variant={this.props.variant} />
-                    <Body id={this.props.currentWorkoutId} theme={this.props.theme} variant={this.props.variant} />
-                </div>
-            );
+        if (this.props.location.state.image !== undefined) {
+            if (this.props.theme !== null) {
+                return (
+                    <div>
+                        <Navigation theme={this.props.theme} variant={this.props.variant} />
+                        <Body image={this.props.location.state.image} id={this.props.currentWorkoutId} theme={this.props.theme} variant={this.props.variant} />
+                    </div>
+                );
+            } else {
+                return <Loading />
+            }
         } else { 
-            return <Loading />
+            return this.props.history.push("/workouts/")
         }
     }
 }

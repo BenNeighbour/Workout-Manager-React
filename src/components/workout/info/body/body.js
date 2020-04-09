@@ -67,11 +67,18 @@ class Body extends React.Component {
             if (store.getState().workout.allWorkouts.length > 0) {
                 return (
                     <div className="body">
-                        <h1 id="header" style={{ color: `var(--${this.props.theme})` }}>{this.props.selectedWorkout.name}</h1>
+                        <div className="top" style={{ height: "max-content", overflow: "hidden" }}>
+                            <div className="metadata" style={{ width: "40%", float: "left" }}>
+                                <h1 id="header" style={{ color: `var(--${this.props.theme})` }}>{this.props.selectedWorkout.name}</h1>
+                                <p className="name" style={{ color: `var(--${this.props.theme})` }}><b>Name:</b> {this.props.selectedWorkout.name}</p>
+                                <p className="name" style={{ color: `var(--${this.props.theme})` }}><b>Description:</b> {this.props.selectedWorkout.description}</p>
+                                <p className="name" style={{ color: `var(--${this.props.theme})` }}><b>Duration:</b> {this.props.selectedWorkout.duration}</p>
+                            </div>
 
-                        <p className="name" style={{ color: `var(--${this.props.theme})` }}><b>Name:</b> {this.props.selectedWorkout.name}</p>
-                        <p className="name" style={{ color: `var(--${this.props.theme})` }}><b>Description:</b> {this.props.selectedWorkout.description}</p>
-                        <p className="name" style={{ color: `var(--${this.props.theme})` }}><b>Duration:</b> {this.props.selectedWorkout.duration}</p>
+                            <div className="image-area" style={{ width: "45%", float: "right", margin: "1.5vw" }}>
+                                <img style={{ width: "110%" }} alt="none" src={`data:image/jpeg;base64,${this.props.image}`} />
+                            </div>
+                        </div>
 
                         <Tabs defaultActiveKey={0} style={{ margin: "22.5px" }}>
                             {
