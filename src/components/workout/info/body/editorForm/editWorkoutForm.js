@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { reduxForm, Field } from "redux-form";
-import { Button, Tab, Tabs } from "react-bootstrap";
+import { Button, Tab, Tabs, Form } from "react-bootstrap";
 import { getFormValues } from "redux-form";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
@@ -15,16 +15,54 @@ let EditForm = props => {
     const [, updateState] = React.useState();
     const forceUpdate = useCallback(() => updateState({}), []);
 
+    const [stateProps, setStateProps] = React.useState(`data:image/jpeg;base64,${props.image}`);
+
     return (
-        <form onSubmit={handleSubmit} className="editForm">
-            <h1 id="header" style={{color: `var(--${props.theme})`}}>Edit</h1>
-            <b className="name" style={{color: `var(--${props.theme})`}}>Name:</b>
-            <Field
-                type="text" name="name" component={renderField}
-                id="name" label="Workout Name" />
-            
-            <b className="description" style={{color: `var(--${props.theme})`}}>Description:</b>
-            <Field type="text" name="description" id="custom-field" className="form-control" style={{ height: "130px", maxHeight: "130px", minHeight: "130px" }} component="textarea" label="Description" />
+        <Form onSubmit={handleSubmit} className="editForm">
+
+            <div className="top" style={{ height: "max-content", overflow: "hidden" }}>
+                <div className="metadata" style={{ width: "50%", float: "left" }}>
+                    <h1 id="header" style={{color: `var(--${props.theme})`}}>Edit</h1>
+                    <b className="name" style={{color: `var(--${props.theme})`}}>Name:</b>
+                    <Field
+                        type="text" name="name" component={renderField}
+                        id="name" label="Workout Name" />
+                    
+                    <b className="description" style={{color: `var(--${props.theme})`}}>Description:</b>
+                    <Field type="text" name="description" id="custom-field" className="form-control" style={{ height: "130px", maxHeight: "130px", minHeight: "130px", width: "90%" }} component="textarea" label="Description" />
+
+                </div>
+
+                <div className="image-area" style={{ width: "45%", float: "right", margin: "1.5vw" }}>
+                    <img style={{ width: "110%" }} alt="none" src={`${stateProps}`} />
+
+                    <div class="custom-file" style={{ overflow: "hidden" }}>
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" onChange={async function change(event) {
+
+                            // Convert imagae to Base64
+                            const toBase64 = file => new Promise((resolve, reject) => {
+                                const reader = new FileReader();
+                                reader.readAsDataURL(file);
+                                reader.onload = () => resolve(reader.result);
+                                reader.onerror = error => reject(error);
+                            });
+
+                            let converted = await toBase64(event.target.files[0])
+
+                            setStateProps(converted)
+
+                            
+                            // Upload image
+                            const imageParam = new FormData();
+                            imageParam.append('image', converted);
+
+                            props.uploadImage(imageParam);
+                            
+                        }} />
+                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Upload image</label>
+                    </div>
+                </div>
+            </div>
 
             <Tabs defaultActiveKey={0} style={{margin: "22.5px", overflowY: "hidden"}}>
                 {
@@ -138,7 +176,8 @@ let EditForm = props => {
             
             <Button type="button" variant={`outline-${props.theme}`}>Back</Button>
             <Button variant={`outline-${props.theme}`} type="submit">Save</Button>
-        </form>
+            
+        </Form>
     );
     
 };
@@ -156,7 +195,7 @@ let changeExisting = (exercise, helper) => {
 
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
     <div className="field">
-        <input {...input} className="form-control" placeholder={label} type={type} id="custom-field" />
+        <input {...input} className="form-control" placeholder={label} type={type} style={{ width: "90%" }} id="custom-field" />
 
         <div className="message">
             {touched && ((error && <p style={{ marginBottom: "0px", marginTop: "0px", color: "red" }}>{error}</p>) || (warning && <p>{warning}</p>))}
@@ -175,6 +214,10 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => {
+    const config = {
+        headers: {"Content-type": "multipart/form-data;"}
+    }; 
+    
     return {
         addExercise: (eid, name, reps, sets, duration, burntCals) => dispatch({ 
             // Do axios PUT request for each exercise
@@ -191,6 +234,15 @@ const mapDispatchToProps = (dispatch) => {
                             "wid": store.getState().workout.currentWid 
                         }
                     }
+                )
+        }),
+
+        uploadImage: (imageParam) => dispatch({
+            type: "IMAGE_UPLOAD", payload:
+                axios.post(
+                    `http://localhost:8080/api/v1/workout/image/save/${store.getState().workout.currentWid}/`,
+                    imageParam,
+                    config
                 )
         })
     }

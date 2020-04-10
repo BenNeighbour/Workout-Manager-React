@@ -53,7 +53,7 @@ class Body extends React.Component {
         while (this.state.isEditing === true) { 
             return (
                 <div>
-                    <EditForm onSubmit={this.onSubmit} exerciseList={this.props.selectedWorkout.exerciseList}
+                    <EditForm image={this.props.image} onSubmit={this.onSubmit} exerciseList={this.props.selectedWorkout.exerciseList}
                         initialValues={{
                             name: this.props.selectedWorkout.name,
                             description: this.props.selectedWorkout.description,
