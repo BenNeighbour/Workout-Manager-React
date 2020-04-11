@@ -36,10 +36,10 @@ let EditForm = props => {
                 <div className="image-area" style={{ width: "45%", float: "right", margin: "1.5vw" }}>
                     <img style={{ width: "110%" }} alt="none" src={`${stateProps}`} />
 
-                    <div class="custom-file" style={{ overflow: "hidden" }}>
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" onChange={async function change(event) {
+                    <div className="custom-file" style={{ overflow: "hidden" }}>
+                        <input type="file" className="custom-file-input" id="inputGroupFile01" onChange={async function change(event) {
 
-                            // Convert imagae to Base64
+                            // Convert image to Base64
                             const toBase64 = file => new Promise((resolve, reject) => {
                                 const reader = new FileReader();
                                 reader.readAsDataURL(file);
@@ -51,15 +51,14 @@ let EditForm = props => {
 
                             setStateProps(converted)
 
-                            
-                            // Upload image
+                            // Upload image as Base64 string
                             const imageParam = new FormData();
                             imageParam.append('image', converted);
 
                             props.uploadImage(imageParam);
                             
                         }} />
-                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Upload image</label>
+                        <label className="custom-file-label" aria-describedby="inputGroupFileAddon02">Upload image</label>
                     </div>
                 </div>
             </div>
@@ -238,9 +237,9 @@ const mapDispatchToProps = (dispatch) => {
         }),
 
         uploadImage: (imageParam) => dispatch({
-            type: "IMAGE_UPLOAD", payload:
-                axios.post(
-                    `http://localhost:8080/api/v1/workout/image/save/${store.getState().workout.currentWid}/`,
+            type: "UPDATE_IMAGE_UPLOAD", payload:
+                axios.put(
+                    `http://localhost:8080/api/v1/workout/image/update/${store.getState().workout.currentWid}/`,
                     imageParam,
                     config
                 )
