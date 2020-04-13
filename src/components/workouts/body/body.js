@@ -41,6 +41,9 @@ class Body extends Component {
 
   componentDidMount() {  
     this.getProperties();
+    if (this.state.imgData === []) {
+      window.location.reload()
+    }
   }
 
   render() {
@@ -56,8 +59,8 @@ class Body extends Component {
           <Card.Body>
             <Card.Title>{card.name}</Card.Title>
             <Card.Text>
-            <b>Duration: </b> {card.duration} minutes<br />
-            {card.description}
+              <b>Duration: </b> {card.duration} minutes<br />
+              {card.description}
             </Card.Text>
             <Button variant={`outline-${this.props.theme}`} onClick={this.redirect.bind(this, card.wid, this.state.imgData[index])}>Details</Button>
           </Card.Body>

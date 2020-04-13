@@ -25,6 +25,7 @@ class Content extends Component {
             await this.setChecked(todo.workout.name, todo.completed)
         });
         this.props.getWorkouts("http://localhost:8080/api/v1/user/username/by/" + store.getState().user.user + "/?access_token=" + store.getState().user.accessToken)
+        
     }
 
     render() {

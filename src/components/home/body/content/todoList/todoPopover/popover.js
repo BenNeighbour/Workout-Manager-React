@@ -8,6 +8,7 @@ import axios from "axios";
 const TodoItemPopover = (props) => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
+  const [imgData, setImgData] = useState([]);
   const ref = useRef(null);
 
   const handleClick = event => {
@@ -32,8 +33,18 @@ const TodoItemPopover = (props) => {
             <p style={{ fontWeight: "450" }}>Description:</p><p style={{ fontWeight: "15" }}>{props.todo.description}</p>
 
             <Button onClick={async () => {
-              await store.dispatch({ type: "POST_CURRENT_WID", payload: props.title.wid })
-              props.history.push("/workout/info")
+              await axios.get("http://localhost:8080/api/v1/workout/image/by/" + props.todo.workout.image.id)
+              .then(async (data) => {
+                let newArr = imgData;
+                newArr.push(data.data)
+                await setImgData(newArr)
+              })
+
+              await store.dispatch({ type: "POST_CURRENT_WID", payload: props.todo.workout.wid })
+              props.history.push({
+                pathname: "/workout/info",
+                state: { image: imgData }
+              });
             }} variant={`outline-${props.theme}`} size="sm">Go to workout</Button>
             
             <div style={{ paddingTop: "10px" }}>
