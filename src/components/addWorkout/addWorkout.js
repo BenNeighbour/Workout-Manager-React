@@ -10,13 +10,14 @@ import { getFormValues } from 'redux-form';
 import Loading from '../loading/loading.js';
 
 class AddWorkoutPage extends Component {
-  submit = values => {
+  submit = async () => {
     const name = this.props.fields.name;
     const description = this.props.fields.description;
     const exerciseList = [];
     const duration = this.props.fields.duration;
 
-    this.props.submitWorkout(name, exerciseList, description, duration);
+    await this.props.submitWorkout(name, exerciseList, description, duration);
+
   }
 
   render() {
@@ -24,7 +25,6 @@ class AddWorkoutPage extends Component {
       return (
         <div className="App">
           <Navigation theme={this.props.theme} variant={this.props.variant} />
-          <h1 id="header" style={{color: `var(--${this.props.theme})`}}>Add Workout</h1>
           <Body submit={this.submit.bind(this)} theme={this.props.theme} variant={this.props.variant} />
         </div>
       );
@@ -47,12 +47,12 @@ const mapDispatchToProps = (dispatch) => {
   };
 
   return {
-    submitWorkout: (name, exerciseList, description, duration) => { 
+    submitWorkout: (name, exerciseList, description, duration) => {
       store.dispatch({
         type: "WORKOUT", payload:
           axios.post(
-          `http://localhost:8080/api/v1/workout/save/?access_token=${store.getState().user.accessToken}`,
-            { 
+            `http://localhost:8080/api/v1/workout/save/?access_token=${store.getState().user.accessToken}`,
+            {
               "name": name,
               "exerciseList": exerciseList,
               "description": description,
@@ -61,30 +61,30 @@ const mapDispatchToProps = (dispatch) => {
                 "uid": store.getState().user.uid
               }
             }
-          ).then((data) => {
+          ).then(async (data) => {
             return data;
           }).catch(async (error) => {
             if (error.response.status === 401) {
               // Try refresh
-              await store.dispatch({ type: "USER_TOKEN_REFRESH", payload: 
-                axios.post(
-                  `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
-                  {}, 
-                  config
-                ).then(async (data) => {
-                  window.location.reload()
-                  return data;
-                }).catch(async (error) => { 
-                  await store.dispatch({ type: "USER_LOGOUT" });
-                  await this.props.history.push("/")
-                  window.location.reload()
-                })
+              await store.dispatch({
+                type: "USER_TOKEN_REFRESH", payload:
+                  axios.post(
+                    `http://localhost:8080/api/v1/user/login/?grant_type=refresh_token&refresh_token=${store.getState().user.refreshToken}`,
+                    {},
+                    config
+                  ).then(async (data) => {
+                    window.location.reload()
+                    return data;
+                  }).catch(async (error) => {
+                    await store.dispatch({ type: "USER_LOGOUT" });
+                    await this.props.history.push("/")
+                    window.location.reload()
+                  })
               })
             }
           })
       })
-    },
-
+    }
 
   }
 };

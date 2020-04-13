@@ -39,7 +39,7 @@ class Body extends Component {
     
   }
 
-  componentDidMount() { 
+  componentDidMount() {  
     this.getProperties();
   }
 
